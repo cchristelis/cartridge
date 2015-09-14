@@ -1,6 +1,6 @@
-# Basic website setup.  
+# Basic website generator.  
 
-Get yourself going with a ready made basic gulp setup.
+Get yourself going with a ready made basic website setup.
 
 This repository holds the standard SASS, JavaScript and Testing suit for any website at start level.
 
@@ -8,21 +8,39 @@ The site uses [Gulp](https://www.google.com) as a task runner.
 
 The site is setup to use Harry Roberts [csswizardry's](https://github.com/csswizardry) ITCSS (inverted triangle) methodology. See [Managing CSS Projects with ITCSS](https://speakerdeck.com/dafed/managing-css-projects-with-itcss) for further details.
 
-This setup is purposely light of gulp tasks and does the very basics to get you up and running.
+This setup will enable you to run a local node server based instance of a website. Through the use of handlebars templating you will be able to publish your website out into pre-compiled static HTML files.
+It also gives you the ability to package the site up with all the necessarry files.
 
 ## Installation
 
 Do one of the following
 
-* Clone the git repo - git@github.com:andrewbrandwood/website-basic.git
-
+* Clone the git repo - git@github.com:andrewbrandwood/node-static-site-generator.git
 then...	  
 
 ### Gulp (Client side setup).
 
 * Open a new command prompt (or Terminal on mac).
-* Navigate to public folder from the root of the website
+* Navigate to the folder
+* run - npm install (sudo may be required for mac)
 * run - gulp
+* run - node website.js
+
+### production and release files.
+
+* run - gulp build --prod
+* run - gulp release --prod
+
+adding "--prod" after any command will compress and minify the relevant files.
+
+### viewing your site
+An index has page has puprposely been ommited from this setup to encourage you to build from a styleguide.
+
+navigate to http://localhost:3001
+
+or
+
+if you have run build you can navigate to the build folder and open the static HTML files
 
 ### 3rd party plugin notes.
 

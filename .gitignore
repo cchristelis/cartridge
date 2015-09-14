@@ -1,0 +1,7 @@
+_client
+node_modules
+logs
+logfile.txt
+build
+release
+*.css

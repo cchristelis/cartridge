@@ -11,7 +11,8 @@ module.exports = function(){
 			srcStyles + '/_scope/*.scss', 
 			srcStyles + '/_generic/*.scss', 
 			srcStyles + '/_elements/*.scss', 
-			srcStyles + '/_objects/*.scss', 
+			srcStyles + '/_objects/*.scss',
+			srcStyles + '/_components/*.scss',
 			'views/_partials/**/*.scss', 
 			srcStyles + '/_trumps/*.scss'
 		];

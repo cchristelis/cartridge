@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/code-computerlove/node-static-site-generator.png?label=ready&title=Ready)](https://waffle.io/code-computerlove/node-static-site-generator)
 # Basic website generator.  
 
 Get yourself going with a ready made basic website setup.

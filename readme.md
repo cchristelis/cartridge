@@ -1,7 +1,8 @@
 [![Stories in Ready](https://badge.waffle.io/code-computerlove/node-static-site-generator.png?label=ready&title=Ready)](https://waffle.io/code-computerlove/node-static-site-generator)
+
 # Basic website generator.  
 
-Get yourself going with a ready made basic website setup.
+> Get yourself going with a ready made basic static website setup
 
 This repository holds the standard SASS, JavaScript and Testing suit for any website at start level.
 
@@ -16,28 +17,27 @@ It also gives you the ability to package the site up with all the necessarry fil
 
 Do one of the following
 
-* Clone the git repo - git@github.com:andrewbrandwood/node-static-site-generator.git
-then...	  
+* Clone the git repo - `https://github.com/code-computerlove/node-static-site-generator.git`
 
 ### Gulp (Client side setup).
 
 * Open a new command prompt (or Terminal on mac).
 * Navigate to the folder
-* run - npm install (sudo may be required for mac)
-* run - gulp
-* run - node website.js
+* run - `npm install` (sudo may be required for mac)
+* run - `gulp`
+* run - `node website.js`
 
 ### production and release files.
 
-* run - gulp build --prod
-* run - gulp release --prod
+* run - `gulp build --prod`
+* run - `gulp release --prod`
 
-adding "--prod" after any command will compress and minify the relevant files.
+adding `--prod` after any command will compress and minify the relevant files.
 
 ### viewing your site
 An index has page has puprposely been ommited from this setup to encourage you to build from a styleguide.
 
-navigate to http://localhost:3001
+navigate to `http://localhost:3001`
 
 or
 

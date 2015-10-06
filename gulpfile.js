@@ -16,6 +16,7 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     runSeq = require('run-sequence'),
 		config = require('./_config/project.json'),
+        templateDataJson = require('./_config/templateData.json'),
 		jshintConfig = require('./_config/jshint.json'),
 		creds = require('./_config/creds.json'),
 		itcss = require('./_config/itcss'),
@@ -116,7 +117,10 @@ gulp.task('package-release', function () {
 \* ============================================================ */
 
 gulp.task('compile-html', function () {
-    var templateData = {}, // if template data is used then get it from a json file
+    var templateData = {
+        data: templateDataJson
+    },
+
     options = {
         batch : ['./views/_partials'],
         helpers: {}

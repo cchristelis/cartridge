@@ -1,3 +1,6 @@
+var path = require('path');
+var templateData = require(path.resolve(__dirname, '..', '_config', 'templateData.json'));
+
 var WebsiteController = function (website) {
 	// Public functions
 	var website = website;
@@ -10,7 +13,8 @@ var WebsiteController = function (website) {
 
 	function createModel(params){
 		var model = {
-			layout: false
+			layout: false,
+			data: templateData,
 		}
 
 		return model;

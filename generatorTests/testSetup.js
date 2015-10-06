@@ -1,6 +1,7 @@
 var os = require('os');
 var fs = require('fs-extra');
 var path = require('path');
+var exec = require('child_process').exec;
 
 const PROJECT_DIRECTORY = path.join(__dirname, '..');
 const OS_TEMP_LOCATION = path.join(os.tmpdir(), 'node-static-site-generator-tests');
@@ -12,7 +13,7 @@ fs.copy(PROJECT_DIRECTORY, OS_TEMP_LOCATION, {
     clobber: true,
     filter: function(directory) { 
         //exclude specific directories (mainly node_modules) from being copied over
-        return directory.indexOf('karma') === -1 && directory.indexOf('phantom') === -1 && directory.indexOf('express') === -1; 
+        return directory.indexOf('karma') === -1 && directory.indexOf('phantom') === -1 && directory.indexOf('express') === -1 && directory.indexOf('build') === -1 && directory.indexOf('release') === -1 && directory.indexOf('_source') === -1; 
     }
 }, function (err) {
 
@@ -22,4 +23,8 @@ fs.copy(PROJECT_DIRECTORY, OS_TEMP_LOCATION, {
     }
 
     console.log('3) Source files copied - Test setup complete');
+
+    exec('mocha', function(err, stdout, stderr) {
+        console.log(stdout);
+    });
 })

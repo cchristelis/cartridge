@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "chai": "^3.0.0",
+    "fs-extra": "^0.24.0",
     "gulp-sass-generate-contents": "^0.1.1",
     "karma": "^0.13.10",
     "karma-chai": "^0.1.0",
@@ -49,7 +50,7 @@
     "karma-mocha-reporter": "^1.0.2",
     "karma-notification-reporter": "0.0.1",
     "karma-phantomjs-launcher": "^0.2.0",
-    "mocha": "^2.2.5",
+    "mocha": "^2.3.3",
     "phantomjs": "^1.9.17"
   }
 }

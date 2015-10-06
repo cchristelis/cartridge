@@ -17,6 +17,7 @@ var gulp = require('gulp'),
     runSeq = require('run-sequence'),
 		config = require('./_config/project.json'),
         templateDataJson = require('./_config/templateData.json'),
+        templateHelpers = require('./_config/templateHelpers.js')(),
 		jshintConfig = require('./_config/jshint.json'),
 		creds = require('./_config/creds.json'),
 		itcss = require('./_config/itcss'),
@@ -27,12 +28,10 @@ var gulp = require('gulp'),
 		rename = require('gulp-rename'),
 		zip = require('gulp-zip');
 
-
-
-
 /* ============================================================ *\
     SCRIPTS JS / lint, concat and minify scripts
 \* ============================================================ */
+
 
 gulp.task('scripts', function(){
 	return gulp.src([config.src + '/' + config.dirs.scripts + '/**/*.js'])
@@ -41,7 +40,6 @@ gulp.task('scripts', function(){
     .pipe(gulpif(argv.prod, uglify())) //Production only
     .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });
-
 
 /* ============================================================ *\
     GENERATE SASS IMPORTS AND
@@ -75,6 +73,7 @@ gulp.task('sass', function () {
     IMAGES / minify images
 \* ============================================================ */
 
+
 gulp.task('imagemin', function () {
     return gulp.src(config.src + '/' + config.dirs.images + '/**/*')
         .pipe(gulpif(argv.prod, imagemin({
@@ -88,6 +87,8 @@ gulp.task('imagemin', function () {
 /* ============================================================ *\
     MOVE / Copy files 
 \* ============================================================ */
+
+
 gulp.task('copy:fonts', function(){
 	return gulp.src([config.src + '/' + config.dirs.fonts + '/**/*'])
 	.pipe(gulp.dest(config.dest + '/' + config.dirs.fonts));
@@ -101,6 +102,7 @@ gulp.task('copy', function(){
 /* ============================================================ *\
     PACKAGE THE FOLDER UP
 \* ============================================================ */
+
 
 gulp.task('package-release', function () {
 
@@ -116,6 +118,7 @@ gulp.task('package-release', function () {
     COMPILE TEMPLATES / HTML
 \* ============================================================ */
 
+
 gulp.task('compile-html', function () {
     var templateData = {
         data: templateDataJson
@@ -123,7 +126,7 @@ gulp.task('compile-html', function () {
 
     options = {
         batch : ['./views/_partials'],
-        helpers: {}
+        helpers: templateHelpers
     }
  	
     return gulp.src(['./views/*.hbs'])
@@ -158,5 +161,3 @@ gulp.task('release', function (cb) {
 gulp.task('default', function (cb) {
 	runSeq(['sass-generate-contents'],['sass', 'scripts', 'copy:fonts', 'imagemin'], cb);
 });
-
-

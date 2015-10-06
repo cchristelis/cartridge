@@ -1,5 +1,6 @@
 var path = require('path');
 var templateData = require(path.resolve(__dirname, '..', '_config', 'templateData.json'));
+var templateHelpers = require(path.resolve(__dirname, '..', '_config', 'templateHelpers.js'))();
 
 var WebsiteController = function (website) {
 	// Public functions
@@ -15,6 +16,7 @@ var WebsiteController = function (website) {
 		var model = {
 			layout: false,
 			data: templateData,
+			helpers: templateHelpers
 		}
 
 		return model;

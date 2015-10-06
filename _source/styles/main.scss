@@ -34,11 +34,11 @@
 * Layout - styles for all layout and or grid system
 * Styleguide layout and filler styles.
 * 
-* SITE-FOOTER
-*  footer styles
-* 
 * SITE-HEADER
 * Header - styles for header includes local variables for all header elements
+* 
+* SITE-FOOTER
+*  footer styles
 *
 */
 
@@ -57,5 +57,5 @@
 @import "_elements/_elements.links.scss";
 @import "_objects/_objects.layout.scss";
 @import "_objects/_objects.styleguide.scss";
-@import "../../views/_partials/site-footer/site-footer.scss";
 @import "../../views/_partials/site-header/site-header.scss";
+@import "../../views/_partials/site-footer/site-footer.scss";

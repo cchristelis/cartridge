@@ -1,7 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/code-computerlove/node-static-site-generator.png?label=ready&title=Ready)](https://waffle.io/code-computerlove/node-static-site-generator)
 [![devDependency Status](https://david-dm.org/code-computerlove/node-static-site-generator/dev-status.svg)](https://david-dm.org/code-computerlove/node-static-site-generator#info=devDependencies)
 [![Dependency Status](https://david-dm.org/code-computerlove/node-static-site-generator.svg)](https://david-dm.org/code-computerlove/node-static-site-generator)
-
+[![Build Status][ci-img]][ci]
 
 # Basic static website generator
 
@@ -20,7 +20,7 @@ It also gives you the ability to package the site up with all the necessarry fil
 
 * Clone the git repo - `https://github.com/code-computerlove/node-static-site-generator.git`
 
-Once you have the source code, you will need to do one of the following: 
+Once you have the source code, you will need to do one of the following:
 
 #### Gulp (Client side setup).
 
@@ -44,7 +44,7 @@ adding `--prod` after any command will compress and minify the relevant files.
 
 An index has page has puprposely been ommited from this setup to encourage you to build from a styleguide.
 
-Ensure you have a local server instance running using `node website.js` and then navigate to `http://localhost:3001`. 
+Ensure you have a local server instance running using `node website.js` and then navigate to `http://localhost:3001`.
 
 If you have run the `build` task you can navigate to the build folder and open the static HTML files.
 
@@ -55,9 +55,9 @@ Template data is stored in the `templateData.json` file located in `_config` fol
 ### 3rd party plugin notes.
 
 #### [gulp-sass-generate-contents](https://github.com/andrewbrandwood/gulp-sass-generate-contents)
-To enable the compiling of a list of contents in the main scss file and to import all the correct files.  It is required to have a comment at the top of each sass file. 
+To enable the compiling of a list of contents in the main scss file and to import all the correct files.  It is required to have a comment at the top of each sass file.
 
 anything on the first line other than a double slash // will result in the file being ignored from the contents and the imports. (see options to change this)
 
 #### [run-sequence](https://www.npmjs.com/package/run-sequence)
-Gulp is an asynchronous task runner.  We need the gulp-sass-generate-contents to run and complete before we can compile the sass.  The run-sequence plugin allows us to run the contents file before compiling our SASS. 
+Gulp is an asynchronous task runner.  We need the gulp-sass-generate-contents to run and complete before we can compile the sass.  The run-sequence plugin allows us to run the contents file before compiling our SASS.

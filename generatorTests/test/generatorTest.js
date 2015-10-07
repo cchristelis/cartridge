@@ -8,7 +8,7 @@ describe('As a dev', function() {
 
     describe('When using the static site generator', function() {
 
-        it('then then _config folder should exist', function() {
+        it('then _config folder should exist', function() {
             var pathToTest = path.join(ROOT_DIR, '_config');
             fs.statSync(pathToTest);
         })

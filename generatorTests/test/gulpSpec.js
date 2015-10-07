@@ -42,4 +42,24 @@ describe('As a dev', function() {
 
     });
 
+    describe('When running `gulp build --prod`', function() {
+
+        before(function(done) {
+
+            process.chdir(ROOT_DIR);
+
+            var gulp = spawn('gulp', ['build', '--prod'])
+
+            gulp.on('close', function() {
+                done();
+            });
+        });
+
+        it('the build folder should exist', function() {
+            var pathToTest = path.join(ROOT_DIR, 'build');
+            pathToTest.should.be.a.directory().and.not.empty;
+        });
+
+    });
+
 });

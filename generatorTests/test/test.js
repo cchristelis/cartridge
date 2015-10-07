@@ -9,26 +9,22 @@ describe('As a dev', function() {
 
     describe('When using the static site generator', function() {
 
-        it('_config folder should exist', function() {
+        it('then then _config folder should exist', function() {
             var pathToTest = path.join(ROOT_DIR, '_config');
             fs.statSync(pathToTest);
         })
 
-        it('routes folder should exist', function() {
+        it('then routes folder should exist', function() {
             var pathToTest = path.join(ROOT_DIR, 'routes');
             fs.statSync(pathToTest);
         })
 
-        it('views folder should exist', function() {
+        it('then views folder should exist', function() {
             var pathToTest = path.join(ROOT_DIR, 'views');
             fs.statSync(pathToTest);
         })
 
-        it('_config files should exist', function() {
-            //add all files into array
-            //loop over all of them]
-            //ensure they all exist
-
+        it('then _config files should exist', function() {
             var pathToTest = path.join(ROOT_DIR, '_config/');
 
             var files = [
@@ -46,6 +42,27 @@ describe('As a dev', function() {
             });
         })
 
+        it('then required express files exist', function() {
+            var files = [
+                'routing.js',
+                'website.js'
+            ];
+
+            files.forEach(function(fileName) {
+                fs.statSync(path.join(ROOT_DIR, fileName));
+            });
+        })
+
+        it('then required build files exist', function() {
+            var files = [
+                'gulpfile.js',
+                'package.json'
+            ];
+
+            files.forEach(function(fileName) {
+                fs.statSync(path.join(ROOT_DIR, fileName));
+            });
+        })
     });
 
 });

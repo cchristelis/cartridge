@@ -7,3 +7,5 @@ before_script:
     - cd generatorTests
     - npm install -g mocha
     - npm install
+script: 
+    - mocha

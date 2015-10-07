@@ -1,7 +1,7 @@
+[![Build Status][ci-img]][ci]
 [![Stories in Ready](https://badge.waffle.io/code-computerlove/node-static-site-generator.png?label=ready&title=Ready)](https://waffle.io/code-computerlove/node-static-site-generator)
 [![devDependency Status](https://david-dm.org/code-computerlove/node-static-site-generator/dev-status.svg)](https://david-dm.org/code-computerlove/node-static-site-generator#info=devDependencies)
 [![Dependency Status](https://david-dm.org/code-computerlove/node-static-site-generator.svg)](https://david-dm.org/code-computerlove/node-static-site-generator)
-[![Build Status][ci-img]][ci]
 
 # Basic static website generator
 

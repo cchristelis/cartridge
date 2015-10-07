@@ -25,6 +25,11 @@ fs.copy(PROJECT_DIRECTORY, OS_TEMP_LOCATION, {
     process.chdir(path.join(OS_TEMP_LOCATION ,'generatorTests'));
 
     exec('mocha', function(err, stdout, stderr) {
+
+        if(err) {
+            console.error(stderr);
+        }
+
         console.log(stdout);
     });
 })

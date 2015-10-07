@@ -1,26 +1,28 @@
-var assert = require("assert");
 var path = require('path');
-var fs = require('fs');
+var chai = require('chai');
+
+chai.use(require('chai-fs'));
+chai.should();
 
 const ROOT_DIR = path.join(process.cwd(), '..');
 
 describe('As a dev', function() {
 
-    describe('When testing for generator directory structure', function() {
+    describe('When testing generator directory structure', function() {
 
         it('then _config folder should exist', function() {
             var pathToTest = path.join(ROOT_DIR, '_config');
-            fs.statSync(pathToTest);
+            pathToTest.should.be.a.directory();
         })
 
         it('then routes folder should exist', function() {
             var pathToTest = path.join(ROOT_DIR, 'routes');
-            fs.statSync(pathToTest);
+            pathToTest.should.be.a.directory();
         })
 
         it('then views folder should exist', function() {
             var pathToTest = path.join(ROOT_DIR, 'views');
-            fs.statSync(pathToTest);
+            pathToTest.should.be.a.directory();
         })
     });
 

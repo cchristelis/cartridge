@@ -1,15 +1,18 @@
-var assert = require("assert");
 var path = require('path');
-var fs = require('fs');
+var chai = require('chai');
+
+chai.use(require('chai-fs'));
+chai.should();
 
 const ROOT_DIR = path.join(process.cwd(), '..');
 
 describe('As a dev', function() {
 
-    describe('When testing for generator file structure', function() {
+    describe('when testing generator file structure', function() {
 
         it('then _config files should exist', function() {
             var pathToTest = path.join(ROOT_DIR, '_config/');
+            var filePathToTest;
 
             var files = [
                 'creds.json',
@@ -22,29 +25,34 @@ describe('As a dev', function() {
             ];
 
             files.forEach(function(fileName) {
-                fs.statSync(path.join(pathToTest, fileName));
+                filePathToTest = path.join(pathToTest, fileName);
+                filePathToTest.should.be.a.file();
             });
         })
 
-        it('then required express files exist', function() {
+        it('then required express files should exist', function() {
+            var filePathToTest;
             var files = [
                 'routing.js',
                 'website.js'
             ];
 
             files.forEach(function(fileName) {
-                fs.statSync(path.join(ROOT_DIR, fileName));
+                filePathToTest = path.join(ROOT_DIR, fileName);
+                filePathToTest.should.be.a.file();
             });
         })
 
-        it('then required build files exist', function() {
+        it('then required build files should exist', function() {
+            var filePathToTest;
             var files = [
                 'gulpfile.js',
                 'package.json'
             ];
 
             files.forEach(function(fileName) {
-                fs.statSync(path.join(ROOT_DIR, fileName));
+                filePathToTest = path.join(ROOT_DIR, fileName);
+                filePathToTest.should.be.a.file();
             });
         })
 

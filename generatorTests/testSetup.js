@@ -22,7 +22,7 @@ fs.copy(PROJECT_DIRECTORY, OS_TEMP_LOCATION, {
         return console.error(err)
     }
 
-    console.log('3) Source files copied - Test setup complete');
+    process.chdir(path.join(OS_TEMP_LOCATION ,'generatorTests'));
 
     exec('mocha', function(err, stdout, stderr) {
         console.log(stdout);

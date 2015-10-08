@@ -9,6 +9,18 @@ chai.should();
 
 const ROOT_DIR = path.join(process.cwd(), '..');
 
+function runGulpTask(options, callback) {
+
+    process.chdir(ROOT_DIR);
+
+    var gulp = spawn('gulp', options)
+
+    gulp.on('close', function() {
+        callback();
+    });
+
+}
+
 describe('As a dev', function() {
 
     this.timeout(10000);
@@ -16,14 +28,7 @@ describe('As a dev', function() {
     describe('When running `gulp release --prod`', function() {
 
         before(function(done) {
-
-            process.chdir(ROOT_DIR);
-
-            var gulp = spawn('gulp', ['release', '--prod'])
-
-            gulp.on('close', function() {
-                done();
-            });
+            runGulpTask(['release', '--prod'], done)
         });
 
         it('the release folder should exist and not be empty', function() {
@@ -45,14 +50,7 @@ describe('As a dev', function() {
     describe('When running `gulp build --prod`', function() {
 
         before(function(done) {
-
-            process.chdir(ROOT_DIR);
-
-            var gulp = spawn('gulp', ['build', '--prod'])
-
-            gulp.on('close', function() {
-                done();
-            });
+            runGulpTask(['build', '--prod'], done)
         });
 
         it('the build folder should exist and not be empty', function() {

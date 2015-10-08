@@ -26,7 +26,7 @@ describe('As a dev', function() {
 
             files.forEach(function(fileName) {
                 filePathToTest = path.join(pathToTest, fileName);
-                filePathToTest.should.be.a.file();
+                filePathToTest.should.be.a.file().and.not.empty;
             });
         })
 
@@ -39,7 +39,7 @@ describe('As a dev', function() {
 
             files.forEach(function(fileName) {
                 filePathToTest = path.join(ROOT_DIR, fileName);
-                filePathToTest.should.be.a.file();
+                filePathToTest.should.be.a.file().and.not.empty;
             });
         })
 
@@ -52,7 +52,7 @@ describe('As a dev', function() {
 
             files.forEach(function(fileName) {
                 filePathToTest = path.join(ROOT_DIR, fileName);
-                filePathToTest.should.be.a.file();
+                filePathToTest.should.be.a.file().and.not.empty;
             });
         })
 
@@ -64,7 +64,7 @@ describe('As a dev', function() {
 
             files.forEach(function(fileName) {
                 filePathToTest = path.join(pathToTest, fileName);
-                filePathToTest.should.be.a.file();
+                filePathToTest.should.be.a.file().and.not.empty;
             });
         })
 

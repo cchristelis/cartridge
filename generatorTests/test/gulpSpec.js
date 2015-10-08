@@ -26,7 +26,7 @@ describe('As a dev', function() {
             });
         });
 
-        it('the release folder should exist', function() {
+        it('the release folder should exist and not be empty', function() {
             var pathToTest = path.join(ROOT_DIR, 'release');
             pathToTest.should.be.a.directory().and.not.empty;
         });
@@ -55,7 +55,7 @@ describe('As a dev', function() {
             });
         });
 
-        it('the build folder should exist', function() {
+        it('the build folder should exist and not be empty', function() {
             var pathToTest = path.join(ROOT_DIR, 'build');
             pathToTest.should.be.a.directory().and.not.empty;
         });

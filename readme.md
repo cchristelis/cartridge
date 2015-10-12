@@ -51,6 +51,23 @@ If you have run the `build` task you can navigate to the build folder and open t
 
 Template data is stored in the `templateData.json` file located in `_config` folder. Anything stored in this file is piped to the handlebars templates under the `data` namespace. If you want to output the value of the key `pageHeading` this would be done via `{{ data.pageHeading }}` (The double brackets tell handlebars to output a dynamic value). As this file is standard json - arrays and objects can be added and used for template loops, passed to partials etc without issue.
 
+##  Testing
+
+Included as part of the installation are all required dependencies for unit testing using PhantomJS, Karma, Mocha and assertion library chai. These are stored inside of the `test` folder. These can be run by running `npm test` from the root of the project.
+
+The generator itself has tests and are stored seperatly in the folder `generatorTests` along with it's own package file. The entire contents of this folder is to test the correct function of the generator itself e.g. certain files / folders exist and that certain files / folders are created after build tasks.
+
+To this end, after installation, the whole of the `generatorTests` folder **CAN BE** deleted and **WILL NOT** affect to the rest of the files or output.
+
+### Contributing 
+
+The generator tests run on every push can be run locally by doing the following:
+
+- Ensure mocha is installed (preferrably globally) - `npm install -g mocha`
+- Open a command line tool and go into the generator tests folder e.g `cd generatorTest`
+- Install all of the dependencies using `npm install`. These are seperate from the base dependencies and includes tools specific to running the tests.
+- Still inside the `generatorTests` folder, run the command `mocha`. This will run all test files in the `test` folder. **As these tests may test the gulp output, be prepared for any and all gulp tasks to be run (such as creating folders, files etc)**.
+
 ### 3rd party plugin notes.
 
 #### [gulp-sass-generate-contents](https://github.com/andrewbrandwood/gulp-sass-generate-contents)

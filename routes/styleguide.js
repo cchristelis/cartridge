@@ -34,6 +34,6 @@ var WebsiteController = function (website) {
 
 module.exports = function(website) {
 	var controller = new WebsiteController(website);
-	website.get(['/','/:loc'], controller.get);
+	website.get(['/*','/:loc'], controller.get);
 
 };

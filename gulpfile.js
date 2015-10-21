@@ -1,32 +1,45 @@
 /*jslint node: true */
 'use strict';
 
-var gulp = require('gulp'),
-		plugins = require('gulp-load-plugins')(),
-	sgc = require('gulp-sass-generate-contents'),
-	postcss = require('gulp-postcss'),
-	autoprefixer = require('autoprefixer-core'),
-	imagemin = require('gulp-imagemin'),
-		pngquant = require('imagemin-pngquant'),
-		concat = require('gulp-concat'),
-		uglify = require('gulp-uglify'),
-		minifyCss = require('gulp-minify-css'),
-		jshint = require('gulp-jshint'),
-		argv = require('yargs').argv,
-	gulpif = require('gulp-if'),
-	runSeq = require('run-sequence'),
-		config = require('./_config/project.json'),
-		templateDataJson = require('./_config/templateData.json'),
-		templateHelpers = require('./_config/templateHelpers.js')(),
-		jshintConfig = require('./_config/jshint.json'),
-		creds = require('./_config/creds.json'),
-		itcss = require('./_config/itcss'),
-		destStyles = config.src + '/' + config.dirs.styles,
-		sourcemaps   = require('gulp-sourcemaps'),
-		handlebars = require('gulp-compile-handlebars'),
-		pixrem = require('gulp-pixrem'),
-		rename = require('gulp-rename'),
-		zip = require('gulp-zip');
+	// Gulp
+var gulp            = require('gulp'),
+	plugins          = require('gulp-load-plugins')(),
+	gulpif           = require('gulp-if'),
+
+	// Utilities
+	argv             = require('yargs').argv,
+	zip              = require('gulp-zip'),
+	sourcemaps       = require('gulp-sourcemaps'),
+	runSeq           = require('run-sequence'),
+	rename           = require('gulp-rename'),
+	concat           = require('gulp-concat'),
+
+	// Javascript
+	uglify           = require('gulp-uglify'),
+	jshint           = require('gulp-jshint'),
+
+	// Templates
+	handlebars       = require('gulp-compile-handlebars'),
+
+	// CSS
+	minifyCss        = require('gulp-minify-css'),
+	autoprefixer     = require('autoprefixer-core'),
+	sgc              = require('gulp-sass-generate-contents'),
+	postcss          = require('gulp-postcss'),
+	pixrem           = require('gulp-pixrem'),
+
+	// Images
+	imagemin         = require('gulp-imagemin'),
+	pngquant         = require('imagemin-pngquant'),
+
+	// Configuration
+	config           = require('./_config/project.json'),
+	templateDataJson = require('./_config/templateData.json'),
+	templateHelpers  = require('./_config/templateHelpers.js')(),
+	jshintConfig     = require('./_config/jshint.json'),
+	creds            = require('./_config/creds.json'),
+	itcss            = require('./_config/itcss'),
+	destStyles       = config.src + '/' + config.dirs.styles;
 
 /* ============================================================ *\
 	SCRIPTS JS / lint, concat and minify scripts

@@ -136,6 +136,41 @@ gulp.task('compile-html', function () {
 });
 
 /* ============================================================ *\
+    LOCAL TESTING
+\* ============================================================ */
+
+// gulp.task('browser-sync', function() {
+//     browserSync.init(null, {
+//         proxy: "http://localhost:3001",
+//         files: [config.dest + '/' +  '**/*.*'],
+//         browser: "google chrome",
+//         port: 7000,
+//         ui: {
+//             port: 7001
+//         }
+//     }, function browserSyncCallback() {
+//         console.log('browser-sync ready, listening on port: 7000')
+//     });
+// });
+
+
+// gulp.task('nodemon', function(cb) {
+
+//     var started = false;
+
+//     //Reload website.js if templateData file changes (among other files)
+//     return nodemon({
+//         script: 'website.js',
+//         ext: 'js json'
+//     }).on('start', function() {
+//         if (!started) {
+//             cb();
+//             started = true;
+//         }
+//     });
+// });
+
+/* ============================================================ *\
     MAIN TASKS
 \* ============================================================ */
 
@@ -157,6 +192,10 @@ gulp.task('build', function (cb) {
 gulp.task('release', function (cb) {
 	runSeq(['build'], ['package-release'],  cb);
 });
+
+// gulp.task('serve', function(cb) {
+//     runSeq(['nodemon'], ['browser-sync'], cb);
+// });
 
 gulp.task('default', function (cb) {
 	runSeq(['sass-generate-contents'],['sass', 'scripts', 'copy:fonts', 'imagemin'], cb);

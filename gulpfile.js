@@ -59,7 +59,7 @@ gulp.task('sass-generate-contents', function () {
 \* ============================================================ */
 
 
-gulp.task('sass', function () {
+gulp.task('sass', ['sprites'],function () {
 	return gulp.src(destStyles + '/main.scss')
 			.pipe(gulpif(!argv.prod, plugins.sourcemaps.init())) //Default only
 			.pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
@@ -135,6 +135,27 @@ gulp.task('compile-html', function () {
         .pipe(handlebars(templateData, options))
         .pipe(rename({extname: '.html'}))
         .pipe(gulp.dest('build'));
+});
+
+/* ============================================================ *\
+    SPRITES
+\* ============================================================ */
+
+gulp.task('sprites', function() {
+    return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
+        .pipe(plugins.svgSpritesheet({
+            cssPathNoSvg: '../' + config.dirs.images + '/sprite.png',
+            cssPathSvg: '../' + config.dirs.images + '/sprite.svg',
+            padding: 5,
+            pixelBase: config.pixelBaseNoUnit,
+            positioning: 'packed',
+            templateSrc: config.src + '/svg-sprite-sass.tpl',
+            templateDest: destStyles + '/_tools/_tools.sprites.scss',
+            units: 'em'
+        }))
+        .pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.svg'))
+        .pipe(plugins.svg2png())
+        .pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.png'));
 });
 
 /* ============================================================ *\

@@ -28,7 +28,8 @@ var gulp = require('gulp'),
 		rename = require('gulp-rename'),
 		zip = require('gulp-zip'),
         browserSync = require('browser-sync'),
-        nodemon = require('gulp-nodemon');
+        nodemon = require('gulp-nodemon'),
+        gulpCache = require('gulp-cached');
 
 /* ============================================================ *\
     SCRIPTS JS / lint, concat and minify scripts
@@ -86,6 +87,19 @@ gulp.task('imagemin', function () {
         .pipe(gulp.dest(config.dest + '/' + config.dirs.images));
 });
 
+gulp.task('svgmin', function () {
+    return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
+        .pipe(gulpCache('svgmin'))
+        .pipe(plugins.svgmin({
+            plugins: [{
+                removeDimensions: true
+            }, {
+                removeTitle: true
+            }]
+        }))
+        .pipe(gulp.dest(config.src + '/' + config.dirs.images));
+});
+
 /* ============================================================ *\
     MOVE / Copy files 
 \* ============================================================ */
@@ -141,7 +155,7 @@ gulp.task('compile-html', function () {
     SPRITES
 \* ============================================================ */
 
-gulp.task('sprites', function() {
+gulp.task('sprites', ['svgmin'] ,function() {
     return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
         .pipe(plugins.svgSpritesheet({
             cssPathNoSvg: '../' + config.dirs.images + '/sprite.png',

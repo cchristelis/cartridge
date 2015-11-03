@@ -49,7 +49,7 @@ Ensure you have a local server instance running using `gulp serve`. This creates
 
 [Browser Sync](http://www.browsersync.io/) is a tool that allows for painless device testing using a host machine and accessed on port `http://localhost:7000` locally with external devices able to connect to it through the host's ip that is displayed on screen e.g.`192.168.0.1:7000`. Using Browser Sync, any scroll or page interactions are mirrored on all devices and pages are reloaded whenever styles are changed.
 
-The local server can be accessed directly via `http://localhost:7000`
+The local server can be accessed directly via `http://localhost:3001`
 
 If you have run the `gulp build` task you can navigate to the build folder and open the static HTML files.
 

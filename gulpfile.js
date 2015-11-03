@@ -26,7 +26,9 @@ var gulp = require('gulp'),
 		handlebars = require('gulp-compile-handlebars'),
 		pixrem = require('gulp-pixrem'),
 		rename = require('gulp-rename'),
-		zip = require('gulp-zip');
+		zip = require('gulp-zip'),
+        browserSync = require('browser-sync'),
+        nodemon = require('gulp-nodemon');
 
 /* ============================================================ *\
     SCRIPTS JS / lint, concat and minify scripts
@@ -139,36 +141,36 @@ gulp.task('compile-html', function () {
     LOCAL TESTING
 \* ============================================================ */
 
-// gulp.task('browser-sync', function() {
-//     browserSync.init(null, {
-//         proxy: "http://localhost:3001",
-//         files: [config.dest + '/' +  '**/*.*'],
-//         browser: "google chrome",
-//         port: 7000,
-//         ui: {
-//             port: 7001
-//         }
-//     }, function browserSyncCallback() {
-//         console.log('browser-sync ready, listening on port: 7000')
-//     });
-// });
+gulp.task('browser-sync', function() {
+    browserSync.init(null, {
+        proxy: "http://localhost:3001",
+        files: [config.dest + '/' +  '**/*.*'],
+        browser: "google chrome",
+        port: 7000,
+        ui: {
+            port: 7001
+        }
+    }, function browserSyncCallback() {
+        console.log('browser-sync ready, listening on port: 7000')
+    });
+});
 
 
-// gulp.task('nodemon', function(cb) {
+gulp.task('localServer', function(cb) {
 
-//     var started = false;
+    var started = false;
 
-//     //Reload website.js if templateData file changes (among other files)
-//     return nodemon({
-//         script: 'website.js',
-//         ext: 'js json'
-//     }).on('start', function() {
-//         if (!started) {
-//             cb();
-//             started = true;
-//         }
-//     });
-// });
+    //Reload website.js if templateData file changes (among other files)
+    return nodemon({
+        script: 'website.js',
+        ext: 'js json'
+    }).on('start', function() {
+        if (!started) {
+            cb();
+            started = true;
+        }
+    });
+});
 
 /* ============================================================ *\
     MAIN TASKS
@@ -193,9 +195,9 @@ gulp.task('release', function (cb) {
 	runSeq(['build'], ['package-release'],  cb);
 });
 
-// gulp.task('serve', function(cb) {
-//     runSeq(['nodemon'], ['browser-sync'], cb);
-// });
+gulp.task('serve', function(cb) {
+    runSeq(['localServer'], ['browser-sync'], cb);
+});
 
 gulp.task('default', function (cb) {
 	runSeq(['sass-generate-contents'],['sass', 'scripts', 'copy:fonts', 'imagemin'], cb);

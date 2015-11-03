@@ -30,6 +30,8 @@ Once you have the source code, you will need to do one of the following:
     * `gulp`
     * `node website.js`
 
+Optional setup can be found in `welcome.md`
+
 #### Production and release files.
 
 If you need to compile your templates

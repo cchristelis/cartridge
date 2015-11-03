@@ -1,6 +1,6 @@
-# Welcome!
+# Welcome
 
-> Quick run through of post-install setup
+> It's dangerous to go alone. Here's a quick run through of optional post-install setup
 
 **Prerequisite:** Readme client side setup
 

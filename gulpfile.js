@@ -5,7 +5,8 @@
 var gulp            = require('gulp'),
 	plugins         = require('gulp-load-plugins')({
         rename: {
-            'gulp-compile-handlebars' : 'handlebars'
+            'gulp-compile-handlebars' : 'handlebars',
+            'gulp-sass-generate-contents' : 'sgc'
         }
     }),
 	gulpif           = require('gulp-if'),
@@ -28,7 +29,7 @@ var gulp            = require('gulp'),
 	// CSS
 	minifyCss        = require('gulp-minify-css'),
 	autoprefixer     = require('autoprefixer-core'),
-	sgc              = require('gulp-sass-generate-contents'),
+	// sgc              = require('gulp-sass-generate-contents'),
 	postcss          = require('gulp-postcss'),
 	pixrem           = require('gulp-pixrem'),
 
@@ -65,7 +66,7 @@ gulp.task('scripts', function(){
 
 gulp.task('sass-generate-contents', function () {
 	return gulp.src(itcss())
-	.pipe(sgc(destStyles + '/main.scss', creds))
+	.pipe(plugins.sgc(destStyles + '/main.scss', creds))
 	.pipe(gulp.dest(destStyles));
 });
 

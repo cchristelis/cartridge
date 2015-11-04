@@ -7,7 +7,7 @@ var WebsiteController = function (website) {
 	var website = website;
 	this.get = function(request, response) {
 		if (!request.body) return response.sendStatus(400);
-		var url = parseUrl(request.params.loc);
+		var url = parseUrl(request.params[0]);
 		
 		response.render(url, createModel());
 	};

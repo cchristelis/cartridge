@@ -8,8 +8,8 @@ var gulp            = require('gulp'),
 
 	// Utilities
 	argv             = require('yargs').argv,
-	zip              = require('gulp-zip'),
-	sourcemaps       = require('gulp-sourcemaps'),
+	// zip              = require('gulp-zip'),
+	// sourcemaps       = require('gulp-sourcemaps'),
 	runSeq           = require('run-sequence'),
 	rename           = require('gulp-rename'),
 	concat           = require('gulp-concat'),
@@ -123,7 +123,7 @@ gulp.task('package-release', function () {
 	var packageName = creds.packageName + '' + d.getDay() + '.' + d.getMonth() + '.' + d.getFullYear() + '_' + d.getHours() + '.' + d.getMinutes();
 
 	return gulp.src('build/**/*')
-		.pipe(zip(packageName + '.zip'))
+		.pipe(plugins.zip(packageName + '.zip'))
 		.pipe(gulp.dest('release'));
 });
 

@@ -21,7 +21,7 @@ var gulp            = require('gulp'),
 
 	// Javascript
 	// uglify           = require('gulp-uglify'),
-	jshint           = require('gulp-jshint'),
+	// jshint           = require('gulp-jshint'),
 
 	// Templates
 	// handlebars       = require('gulp-compile-handlebars'),
@@ -53,7 +53,7 @@ var gulp            = require('gulp'),
 
 gulp.task('scripts', function(){
 	return gulp.src([config.src + '/' + config.dirs.scripts + '/**/*.js'])
-		.pipe(gulpif(argv.prod, jshint(jshintConfig))) //Default only
+		.pipe(gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
 		.pipe(plugins.concat('bundle.js'))
 		.pipe(gulpif(argv.prod, plugins.uglify())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));

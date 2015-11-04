@@ -34,7 +34,7 @@ var gulp            = require('gulp'),
 	pixrem           = require('gulp-pixrem'),
 
 	// Images
-	imagemin         = require('gulp-imagemin'),
+	// imagemin         = require('gulp-imagemin'),
 	pngquant         = require('imagemin-pngquant'),
 
 	// Configuration
@@ -94,7 +94,7 @@ gulp.task('sass', function () {
 
 gulp.task('imagemin', function () {
 	return gulp.src(config.src + '/' + config.dirs.images + '/**/*')
-		.pipe(gulpif(argv.prod, imagemin({
+		.pipe(gulpif(argv.prod, plugins.imagemin({
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]

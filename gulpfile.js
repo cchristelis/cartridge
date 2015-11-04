@@ -6,7 +6,8 @@ var gulp            = require('gulp'),
 	plugins         = require('gulp-load-plugins')({
         rename: {
             'gulp-compile-handlebars' : 'handlebars',
-            'gulp-sass-generate-contents' : 'sgc'
+            'gulp-sass-generate-contents' : 'sgc',
+            'gulp-minify-css' : 'minifyCss'
         }
     }),
 	gulpif           = require('gulp-if'),
@@ -27,7 +28,7 @@ var gulp            = require('gulp'),
 	// handlebars       = require('gulp-compile-handlebars'),
 
 	// CSS
-	minifyCss        = require('gulp-minify-css'),
+	// minifyCss        = require('gulp-minify-css'),
 	autoprefixer     = require('autoprefixer-core'),
 	// sgc              = require('gulp-sass-generate-contents'),
 	postcss          = require('gulp-postcss'),
@@ -83,7 +84,7 @@ gulp.task('sass', function () {
 		.pipe(plugins.pixrem(config.pixelBase))
 		.pipe(gulpif(!argv.prod, plugins.sourcemaps.write('.'))) //Default only
 		.pipe(plugins.pixrem(config.pixelBase))
-		.pipe(gulpif(argv.prod, minifyCss())) //Production only
+		.pipe(gulpif(argv.prod, plugins.minifyCss())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
 });
 

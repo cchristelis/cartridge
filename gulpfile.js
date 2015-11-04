@@ -3,7 +3,11 @@
 
 	// Gulp
 var gulp            = require('gulp'),
-	plugins          = require('gulp-load-plugins')(),
+	plugins         = require('gulp-load-plugins')({
+        rename: {
+            'gulp-compile-handlebars' : 'handlebars'
+        }
+    }),
 	gulpif           = require('gulp-if'),
 
 	// Utilities
@@ -19,7 +23,7 @@ var gulp            = require('gulp'),
 	jshint           = require('gulp-jshint'),
 
 	// Templates
-	handlebars       = require('gulp-compile-handlebars'),
+	// handlebars       = require('gulp-compile-handlebars'),
 
 	// CSS
 	minifyCss        = require('gulp-minify-css'),
@@ -143,7 +147,7 @@ gulp.task('compile-html', function () {
 	}
 
 	return gulp.src(['./views/*.hbs'])
-		.pipe(handlebars(templateData, options))
+		.pipe(plugins.handlebars(templateData, options))
 		.pipe(plugins.rename({extname: '.html'}))
 		.pipe(gulp.dest('build'));
 });

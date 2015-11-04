@@ -7,35 +7,18 @@ var gulp            = require('gulp'),
         rename: {
             'gulp-compile-handlebars' : 'handlebars',
             'gulp-sass-generate-contents' : 'sgc',
-            'gulp-minify-css' : 'minifyCss'
+            'gulp-minify-css' : 'minifyCss',
+            'gulp-if' : 'gulpif'
         }
     }),
-	gulpif           = require('gulp-if'),
-
 	// Utilities
 	argv             = require('yargs').argv,
-	// zip              = require('gulp-zip'),
-	// sourcemaps       = require('gulp-sourcemaps'),
 	runSeq           = require('run-sequence'),
-	// rename           = require('gulp-rename'),
-	// concat           = require('gulp-concat'),
-
-	// Javascript
-	// uglify           = require('gulp-uglify'),
-	// jshint           = require('gulp-jshint'),
-
-	// Templates
-	// handlebars       = require('gulp-compile-handlebars'),
 
 	// CSS
-	// minifyCss        = require('gulp-minify-css'),
 	autoprefixer     = require('autoprefixer-core'),
-	// sgc              = require('gulp-sass-generate-contents'),
-	postcss          = require('gulp-postcss'),
-	pixrem           = require('gulp-pixrem'),
 
 	// Images
-	// imagemin         = require('gulp-imagemin'),
 	pngquant         = require('imagemin-pngquant'),
 
 	// Configuration
@@ -54,9 +37,9 @@ var gulp            = require('gulp'),
 
 gulp.task('scripts', function(){
 	return gulp.src([config.src + '/' + config.dirs.scripts + '/**/*.js'])
-		.pipe(gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
+		.pipe(plugins.gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
 		.pipe(plugins.concat('bundle.js'))
-		.pipe(gulpif(argv.prod, plugins.uglify())) //Production only
+		.pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });
 
@@ -78,13 +61,13 @@ gulp.task('sass-generate-contents', function () {
 
 gulp.task('sass', function () {
 	return gulp.src(destStyles + '/main.scss')
-		.pipe(gulpif(!argv.prod, plugins.sourcemaps.init())) //Default only
+		.pipe(plugins.gulpif(!argv.prod, plugins.sourcemaps.init())) //Default only
 		.pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
-		.pipe(postcss([autoprefixer({ browsers: ['> 5%', 'Android 3'] })]))
+		.pipe(plugins.postcss([autoprefixer({ browsers: ['> 5%', 'Android 3'] })]))
 		.pipe(plugins.pixrem(config.pixelBase))
-		.pipe(gulpif(!argv.prod, plugins.sourcemaps.write('.'))) //Default only
+		.pipe(plugins.gulpif(!argv.prod, plugins.sourcemaps.write('.'))) //Default only
 		.pipe(plugins.pixrem(config.pixelBase))
-		.pipe(gulpif(argv.prod, plugins.minifyCss())) //Production only
+		.pipe(plugins.gulpif(argv.prod, plugins.minifyCss())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
 });
 
@@ -95,7 +78,7 @@ gulp.task('sass', function () {
 
 gulp.task('imagemin', function () {
 	return gulp.src(config.src + '/' + config.dirs.images + '/**/*')
-		.pipe(gulpif(argv.prod, plugins.imagemin({
+		.pipe(plugins.gulpif(argv.prod, plugins.imagemin({
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
@@ -160,10 +143,10 @@ gulp.task('compile-html', function () {
 
 
 gulp.task('watch:sass', function () {
-	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
+	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
 });
 gulp.task('watch:js', function () {
-	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
+	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
 });
 gulp.task('watch', function (cb) {
 	runSeq(['watch:sass', 'watch:js'], cb);

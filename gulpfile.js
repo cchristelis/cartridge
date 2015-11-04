@@ -155,7 +155,7 @@ gulp.task('compile-html', function () {
     SPRITES
 \* ============================================================ */
 
-gulp.task('sprites', ['svgmin'] ,function() {
+gulp.task('sprites', function() {
     return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
         .pipe(plugins.svgSpritesheet({
             cssPathNoSvg: '../' + config.dirs.images + '/sprite.png',

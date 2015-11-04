@@ -11,7 +11,7 @@ var gulp            = require('gulp'),
 	// zip              = require('gulp-zip'),
 	// sourcemaps       = require('gulp-sourcemaps'),
 	runSeq           = require('run-sequence'),
-	rename           = require('gulp-rename'),
+	// rename           = require('gulp-rename'),
 	concat           = require('gulp-concat'),
 
 	// Javascript
@@ -144,7 +144,7 @@ gulp.task('compile-html', function () {
 
 	return gulp.src(['./views/*.hbs'])
 		.pipe(handlebars(templateData, options))
-		.pipe(rename({extname: '.html'}))
+		.pipe(plugins.rename({extname: '.html'}))
 		.pipe(gulp.dest('build'));
 });
 

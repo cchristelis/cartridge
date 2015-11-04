@@ -20,7 +20,7 @@ var gulp            = require('gulp'),
 	// concat           = require('gulp-concat'),
 
 	// Javascript
-	uglify           = require('gulp-uglify'),
+	// uglify           = require('gulp-uglify'),
 	jshint           = require('gulp-jshint'),
 
 	// Templates
@@ -55,7 +55,7 @@ gulp.task('scripts', function(){
 	return gulp.src([config.src + '/' + config.dirs.scripts + '/**/*.js'])
 		.pipe(gulpif(argv.prod, jshint(jshintConfig))) //Default only
 		.pipe(plugins.concat('bundle.js'))
-		.pipe(gulpif(argv.prod, uglify())) //Production only
+		.pipe(gulpif(argv.prod, plugins.uglify())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });
 

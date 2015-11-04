@@ -24,12 +24,13 @@ var gulp            = require('gulp'),
 	pngquant         = require('imagemin-pngquant'),
 
 	// Configuration
-	config           = require('./_config/project.json'),
-	templateDataJson = require('./_config/templateData.json'),
-	templateHelpers  = require('./_config/templateHelpers.js')(),
-	jshintConfig     = require('./_config/jshint.json'),
-	creds            = require('./_config/creds.json'),
-	itcss            = require('./_config/itcss'),
+    configDirectory = './_config/',
+	config           = require(configDirectory + 'project.json'),
+	templateDataJson = require(configDirectory + 'templateData.json'),
+	templateHelpers  = require(configDirectory + 'templateHelpers.js')(),
+	jshintConfig     = require(configDirectory + 'jshint.json'),
+	creds            = require(configDirectory + 'creds.json'),
+	itcss            = require(configDirectory + 'itcss'),
 	destStyles       = config.src + '/' + config.dirs.styles;
 
 /* ============================================================ *\

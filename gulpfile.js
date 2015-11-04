@@ -17,7 +17,7 @@ var gulp            = require('gulp'),
 	// sourcemaps       = require('gulp-sourcemaps'),
 	runSeq           = require('run-sequence'),
 	// rename           = require('gulp-rename'),
-	concat           = require('gulp-concat'),
+	// concat           = require('gulp-concat'),
 
 	// Javascript
 	uglify           = require('gulp-uglify'),
@@ -54,7 +54,7 @@ var gulp            = require('gulp'),
 gulp.task('scripts', function(){
 	return gulp.src([config.src + '/' + config.dirs.scripts + '/**/*.js'])
 		.pipe(gulpif(argv.prod, jshint(jshintConfig))) //Default only
-		.pipe(concat('bundle.js'))
+		.pipe(plugins.concat('bundle.js'))
 		.pipe(gulpif(argv.prod, uglify())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });

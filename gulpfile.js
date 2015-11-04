@@ -31,37 +31,6 @@ var gulp            = require('gulp'),
 	itcss            = require('./_config/itcss'),
 	destStyles       = config.src + '/' + config.dirs.styles;
 
-
-// var gulp = require('gulp'),
-// 		plugins = require('gulp-load-plugins')(),
-//     sgc = require('gulp-sass-generate-contents'),
-//     postcss = require('gulp-postcss'),
-//     autoprefixer = require('autoprefixer-core'),
-//     imagemin = require('gulp-imagemin'),
-// 		pngquant = require('imagemin-pngquant'),
-// 		concat = require('gulp-concat'),
-// 		uglify = require('gulp-uglify'),
-// 		minifyCss = require('gulp-minify-css'),
-// 		jshint = require('gulp-jshint'),
-// 		argv = require('yargs').argv,
-//     gulpif = require('gulp-if'),
-//     runSeq = require('run-sequence'),
-// 		config = require('./_config/project.json'),
-//         templateDataJson = require('./_config/templateData.json'),
-//         templateHelpers = require('./_config/templateHelpers.js')(),
-// 		jshintConfig = require('./_config/jshint.json'),
-// 		creds = require('./_config/creds.json'),
-// 		itcss = require('./_config/itcss'),
-// 		destStyles = config.src + '/' + config.dirs.styles,
-// 		sourcemaps   = require('gulp-sourcemaps'),
-// 		handlebars = require('gulp-compile-handlebars'),
-// 		pixrem = require('gulp-pixrem'),
-// 		rename = require('gulp-rename'),
-// 		zip = require('gulp-zip'),
-//         browserSync = require('browser-sync'),
-//         nodemon = require('gulp-nodemon'),
-//         gulpCache = require('gulp-cached');
-
 /* ============================================================ *\
 	SCRIPTS JS / lint, concat and minify scripts
 \* ============================================================ */

@@ -29,7 +29,8 @@ var gulp = require('gulp'),
 		zip = require('gulp-zip'),
         browserSync = require('browser-sync'),
         nodemon = require('gulp-nodemon'),
-        gulpCache = require('gulp-cached');
+        gulpCache = require('gulp-cached'),
+        handlebarsConfig = require('./_config/handlebars.json');
 
 /* ============================================================ *\
     SCRIPTS JS / lint, concat and minify scripts
@@ -164,11 +165,11 @@ gulp.task('compile-html', function () {
     },
 
     options = {
-        batch : ['./views/_partials'],
+        batch : handlebarsConfig.partials,
         helpers: templateHelpers
     }
  	
-    return gulp.src(['./views/*.hbs','./views/**/*.hbs','!./views/_partials/**'])
+    return gulp.src(handlebarsConfig.views)
         .pipe(handlebars(templateData, options))
         .pipe(rename({extname: '.html'}))
         .pipe(gulp.dest('build'));

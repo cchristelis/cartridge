@@ -1,6 +1,6 @@
 var path = require('path');
 var spawn = require('child_process').spawn;
-var fs = require('fs');
+var fs = require('fs-plus');
 var path = require('path');
 var chai = require('chai');
 
@@ -21,13 +21,27 @@ function runGulpTask(options, callback) {
 
 }
 
+function cleanBuildAndReleaseFolders() {
+    var buildPath = path.join(ROOT_DIR, 'build');
+    var releasePath = path.join(ROOT_DIR, 'release');
+
+    fs.removeSync(buildPath);
+    fs.removeSync(releasePath);
+}
+
 describe('As a dev', function() {
 
     this.timeout(10000);
 
+    before(function(done) {
+        cleanBuildAndReleaseFolders();
+        done();
+    })
+
     describe('When running `gulp release --prod`', function() {
 
         before(function(done) {
+            cleanBuildAndReleaseFolders();
             runGulpTask(['release', '--prod'], done)
         });
 
@@ -50,6 +64,7 @@ describe('As a dev', function() {
     describe('When running `gulp build --prod`', function() {
 
         before(function(done) {
+            cleanBuildAndReleaseFolders();
             runGulpTask(['build', '--prod'], done)
         });
 

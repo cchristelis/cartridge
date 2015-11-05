@@ -21,7 +21,8 @@ describe('As a dev', function() {
                 'project.json',
                 'sass.json',
                 'templateData.json',
-                'templateHelpers.js'
+                'templateHelpers.js',
+                'handlebars.json'
             ];
 
             files.forEach(function(fileName) {

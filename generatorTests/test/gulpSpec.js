@@ -58,6 +58,11 @@ describe('As a dev', function() {
             pathToTest.should.be.a.directory().and.not.empty;
         });
 
+        it('the build folder should not include the _partials folder', function() {
+            var pathToTest = path.join(ROOT_DIR, 'build', '_partials');
+            pathToTest.should.not.be.a.path();
+        });
+
     });
 
 });

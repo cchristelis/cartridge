@@ -44,6 +44,21 @@ gulp.task('scripts', function(){
     .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });
 
+gulp.task('scripts:vendor', function(){
+    return gulp.src([config.src + '/' + config.dirs.scripts + '/vendor/*.js'])
+        .pipe(gulpif(argv.prod, jshint(jshintConfig))) //Default only
+    .pipe(concat('bundle-critical.js'))
+    .pipe(gulpif(argv.prod, uglify())) //Production only
+    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
+});
+
+gulp.task('scripts:ie', function(){
+    return gulp.src([config.src + '/' + config.dirs.scripts + '/ie/*.js'])
+    .pipe(concat('ie.js'))
+    .pipe(gulpif(argv.prod, uglify())) //Production only
+    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
+});
+
 /* ============================================================ *\
     GENERATE SASS IMPORTS AND
 \* ============================================================ */
@@ -235,5 +250,5 @@ gulp.task('serve', function(cb) {
 });
 
 gulp.task('default', function (cb) {
-	runSeq(['sass-generate-contents'],['sass', 'scripts', 'copy:fonts', 'imagemin'], cb);
+	runSeq(['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], cb);
 });

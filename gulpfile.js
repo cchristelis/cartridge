@@ -168,7 +168,7 @@ gulp.task('compile-html', function () {
         helpers: templateHelpers
     }
  	
-    return gulp.src(['./views/*.hbs'])
+    return gulp.src(['./views/*.hbs','./views/**/*.hbs','!./views/_partials/**'])
         .pipe(handlebars(templateData, options))
         .pipe(rename({extname: '.html'}))
         .pipe(gulp.dest('build'));

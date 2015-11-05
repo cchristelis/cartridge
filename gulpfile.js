@@ -87,6 +87,14 @@ gulp.task('sass', ['sprites'],function () {
 			.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
 });
 
+gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
+    return gulp.src(destStyles + '/ie8.scss')
+            .pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
+            .pipe(postcss([autoprefixer({ browsers: ['IE 8'] })]))
+            .pipe(pixrem(config.pixelBase))
+            .pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
+});
+
 /* ============================================================ *\
     IMAGES / minify images
 \* ============================================================ */
@@ -250,5 +258,5 @@ gulp.task('serve', function(cb) {
 });
 
 gulp.task('default', function (cb) {
-	runSeq(['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], cb);
+	runSeq(['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], ['sass:legacy:ie8'], cb);
 });

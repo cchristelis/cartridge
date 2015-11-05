@@ -7,7 +7,8 @@
 Assuming you have cloned the repo and done your first gulp, here are a few things you may need to do after initial setup.
 
 * [Adding Project Credentials](#adding-project-credentials)
-* [Adding an Images Directory](#adding-an-images-directory)
+* [Adding images](#adding-images)
+* [Adding custom fonts](#adding-custom-fonts)
 * [Setting the default development homepage](#setting-the-default-development-homepage)
 * [Pretty URLs](#pretty-urls)
 
@@ -21,15 +22,25 @@ Assuming you have cloned the repo and done your first gulp, here are a few thing
 * Author - the person or organisation that developed the site.
 * packageName - The name of the package which is used when creating a release zip file. It is recommended to include characters instead of spaces here e.g. "package-name" instead of "package name"
 
-##Adding an Images Directory
+##Adding images
 
-By default no images folder is included, but pre-cooked into the gulp build. To add images into your project, create an `images` folder in the `_source` directory.
+Creating the directory `images` in the `_source` directory will mean that anything inside of this folder is copied over during the build process.
 
 This folder is copied to the `public` folder whenever the `gulp` task is run **and will need to be re-run when adding new images**
 
 When referencing images in the styles, reference them as:  
 
 `url('/_client/images/<path>')`
+
+##Adding custom fonts
+
+Creating the directory `fonts` in the `_source` directory will mean that anything inside of this folder is copied over during the build process.
+
+This folder is copied to the `public` folder whenever the `gulp` task is run **and will need to be re-run when adding new images**
+
+When referencing fonts in the styles, reference them as:
+
+`/_client/fonts/<font-name>`
 
 ##Setting the default development homepage
 

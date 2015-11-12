@@ -36,4 +36,10 @@ http.listen(website.get('port'), function(){
 	console.log('Website ready, listening on port: ' + website.get('port'));
 });
 
+http.on('error', function(err) {
+	console.log('Darn, the site crashed!')
+	console.log('Responded with the error code: ' + err.code + ' (is something already using port ' + website.get('port') + '?)');
+	console.log('Full Error', err);
+})
+
 module.exports = website;

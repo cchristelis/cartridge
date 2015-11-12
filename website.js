@@ -7,7 +7,8 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	expressSession = require('express-session'),
 	methodOverride = require('express-method-override'),
-	exphbs = require('express-handlebars');
+	exphbs = require('express-handlebars'),
+	chalk = require('chalk');
 
 website.engine('hbs', exphbs({
 	extname:'hbs', 
@@ -37,9 +38,17 @@ http.listen(website.get('port'), function(){
 });
 
 http.on('error', function(err) {
-	console.log('Darn, the site crashed!')
-	console.log('Responded with the error code: ' + err.code + ' (is something already using port ' + website.get('port') + '?)');
-	console.log('Full Error', err);
+
+	console.log('');
+	console.log(chalk.inverse('SERVER ERROR'))
+	console.log(chalk.inverse('Error code: %s'), err.code);
+
+	if(err.code === 'EADDRINUSE'){
+		console.log('>> It looks like port ' + chalk.underline(website.get('port')) + ' is being used by another process. The port can only be used by ' + chalk.underline('one') + ' process.');
+	}
+
+	console.log('>> ' + chalk.underline('Full Error'), err);
+	console.log('');
 })
 
 module.exports = website;

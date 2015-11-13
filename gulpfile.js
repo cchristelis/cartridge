@@ -3,28 +3,28 @@
 
 var gulp = require('gulp'),
 		plugins = require('gulp-load-plugins')(),
-    sgc = require('gulp-sass-generate-contents'),
-    postcss = require('gulp-postcss'),
-    autoprefixer = require('autoprefixer-core'),
-    imagemin = require('gulp-imagemin'),
-		pngquant = require('imagemin-pngquant'),
-		concat = require('gulp-concat'),
-		uglify = require('gulp-uglify'),
-		minifyCss = require('gulp-minify-css'),
-		jshint = require('gulp-jshint'),
+    // sgc = require('gulp-sass-generate-contents'),
+    // postcss = require('gulp-postcss'),
+    // autoprefixer = require('autoprefixer-core'),
+    // imagemin = require('gulp-imagemin'),
+		// pngquant = require('imagemin-pngquant'),
+		// concat = require('gulp-concat'),
+		// uglify = require('gulp-uglify'),
+		// minifyCss = require('gulp-minify-css'),
+		// jshint = require('gulp-jshint'),
 		argv = require('yargs').argv,
-    gulpif = require('gulp-if'),
+    // gulpif = require('gulp-if'),
     runSeq = require('run-sequence'),
 		config = require('./_config/project.json'),
-        templateDataJson = require('./_config/templateData.json'),
-        templateHelpers = require('./_config/templateHelpers.js')(),
-		jshintConfig = require('./_config/jshint.json'),
+        // templateDataJson = require('./_config/templateData.json'),
+        // templateHelpers = require('./_config/templateHelpers.js')(),
+		// jshintConfig = require('./_config/jshint.json'),
 		creds = require('./_config/creds.json'),
-		itcss = require('./_config/itcss'),
-		destStyles = config.src + '/' + config.dirs.styles,
-		sourcemaps   = require('gulp-sourcemaps'),
+		// itcss = require('./_config/itcss'),
+		destStyles = config.src + '/' + config.dirs.styles;
+		// sourcemaps   = require('gulp-sourcemaps'),
 		// handlebars = require('gulp-compile-handlebars'),
-		pixrem = require('gulp-pixrem');
+		// pixrem = require('gulp-pixrem');
 		// rename = require('gulp-rename'),
 		// zip = require('gulp-zip'),
         // browserSync = require('browser-sync'),
@@ -32,59 +32,7 @@ var gulp = require('gulp'),
         // gulpCache = require('gulp-cached');
         // handlebarsConfig = require('./_config/handlebars.json');
 
-/* ============================================================ *\
-    SCRIPTS JS / lint, concat and minify scripts
-\* ============================================================ */
-
-
-gulp.task('scripts', function(){
-	return gulp.src([config.src + '/' + config.dirs.scripts + '/**/*.js'])
-		.pipe(gulpif(argv.prod, jshint(jshintConfig))) //Default only
-    .pipe(concat('bundle.js'))
-    .pipe(gulpif(argv.prod, uglify())) //Production only
-    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
-});
-
-gulp.task('scripts:vendor', function(){
-    return gulp.src([config.src + '/' + config.dirs.scripts + '/vendor/*.js'])
-        .pipe(gulpif(argv.prod, jshint(jshintConfig))) //Default only
-    .pipe(concat('bundle-critical.js'))
-    .pipe(gulpif(argv.prod, uglify())) //Production only
-    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
-});
-
-gulp.task('scripts:ie', function(){
-    return gulp.src([config.src + '/' + config.dirs.scripts + '/ie/*.js'])
-    .pipe(concat('ie.js'))
-    .pipe(gulpif(argv.prod, uglify())) //Production only
-    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
-});
-
-/* ============================================================ *\
-    STYLES / SCSS
-\* ============================================================ */
-
-
-gulp.task('sass', ['sprites'],function () {
-	return gulp.src(destStyles + '/main.scss')
-			.pipe(gulpif(!argv.prod, plugins.sourcemaps.init())) //Default only
-			.pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
-			.pipe(postcss([autoprefixer({ browsers: ['> 5%', 'Android 3'] })]))
-			.pipe(plugins.pixrem(config.pixelBase))
-			.pipe(gulpif(!argv.prod, plugins.sourcemaps.write('.'))) //Default only
-			.pipe(plugins.pixrem(config.pixelBase))
-			.pipe(gulpif(argv.prod, minifyCss())) //Production only
-			.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
-});
-
-gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
-    return gulp.src(destStyles + '/ie8.scss')
-            .pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
-            .pipe(postcss([autoprefixer({ browsers: ['IE 8'] })]))
-            .pipe(pixrem(config.pixelBase))
-            .pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
-});
-
+require('./gulpTasks/styles.js')(gulp, config, argv, destStyles);
 require('./gulpTasks/scripts.js')(gulp, config, argv);
 require('./gulpTasks/sprites.js')(gulp, config, destStyles);
 require('./gulpTasks/sass-generate-contents.js')(gulp, creds, destStyles);

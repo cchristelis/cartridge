@@ -85,7 +85,7 @@ gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
             .pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
 });
 
-
+require('./gulpTasks/scripts.js')(gulp, config, argv);
 require('./gulpTasks/sprites.js')(gulp, config, destStyles);
 require('./gulpTasks/sass-generate-contents.js')(gulp, creds, destStyles);
 require('./gulpTasks/image-minify.js')(gulp, config, argv);

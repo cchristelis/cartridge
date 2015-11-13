@@ -2,7 +2,7 @@
     IMAGES / minify images
 \* ============================================================ */
 
-var gulpif = require('gulp-if')
+var gulpif = require('gulp-if');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var svgmin = require('gulp-svgmin');

@@ -142,27 +142,8 @@ gulp.task('copy', function(){
 
 
 require('./gulpTasks/release.js')(gulp, creds);
+require('./gulpTasks/compile-html.js')(gulp);
 
-/* ============================================================ *\
-    COMPILE TEMPLATES / HTML
-\* ============================================================ */
-
-
-gulp.task('compile-html', function () {
-    var templateData = {
-        data: templateDataJson
-    },
-
-    options = {
-        batch : handlebarsConfig.partials,
-        helpers: templateHelpers
-    }
- 	
-    return gulp.src(handlebarsConfig.views)
-        .pipe(handlebars(templateData, options))
-        .pipe(rename({extname: '.html'}))
-        .pipe(gulp.dest('build'));
-});
 
 /* ============================================================ *\
     SPRITES

@@ -5,13 +5,12 @@
 /*jslint node: true */
 'use strict';
 
-var gulp = require('gulp'),
-var plugins = require('gulp-load-plugins')();
+var gulp = require('gulp');
 var argv = require('yargs').argv;
 var runSeq = require('run-sequence');
-var onfig = require('./_config/project.json');
-var eds = require('./_config/creds.json');
-var stStyles = config.src + '/' + config.dirs.styles;
+var config = require('./_config/project.json');
+var creds = require('./_config/creds.json');
+var destStyles = config.src + '/' + config.dirs.styles;
 
 /* ============================================================ *\
     TASKS

@@ -96,36 +96,13 @@ gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
             .pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
 });
 
-/* ============================================================ *\
-    IMAGES / minify images
-\* ============================================================ */
-
-
-gulp.task('imagemin', function () {
-    return gulp.src(config.src + '/' + config.dirs.images + '/**/*')
-        .pipe(gulpif(argv.prod, imagemin({
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
-            use: [pngquant()]
-        }))) //Production only
-        .pipe(gulp.dest(config.dest + '/' + config.dirs.images));
-});
-
-gulp.task('svgmin', function () {
-    return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
-        .pipe(gulpCache('svgmin'))
-        .pipe(plugins.svgmin({
-            plugins: [{
-                removeDimensions: true
-            }, {
-                removeTitle: true
-            }]
-        }))
-        .pipe(gulp.dest(config.src + '/' + config.dirs.images));
-});
 
 
 
+
+
+
+require('./gulpTasks/image-minify.js')(gulp, config, argv);
 require('./gulpTasks/copy-assets.js')(gulp, config);
 require('./gulpTasks/release.js')(gulp, creds);
 require('./gulpTasks/compile-html.js')(gulp);

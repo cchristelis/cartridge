@@ -139,20 +139,9 @@ gulp.task('copy', function(){
 	.pipe(gulp.dest(config.build));
 })
 
-/* ============================================================ *\
-    PACKAGE THE FOLDER UP
-\* ============================================================ */
 
 
-gulp.task('package-release', function () {
-
-	var d = new Date();
-	var packageName = creds.packageName + '' + d.getDay() + '.' + d.getMonth() + '.' + d.getFullYear() + '_' + d.getHours() + '.' + d.getMinutes();
-
-    return gulp.src('build/**/*')
-        .pipe(zip(packageName + '.zip'))
-        .pipe(gulp.dest('release'));
-});
+require('./gulpTasks/release.js')(gulp, creds);
 
 /* ============================================================ *\
     COMPILE TEMPLATES / HTML

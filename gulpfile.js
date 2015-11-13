@@ -61,17 +61,6 @@ gulp.task('scripts:ie', function(){
 });
 
 /* ============================================================ *\
-    GENERATE SASS IMPORTS AND
-\* ============================================================ */
-
-
-gulp.task('sass-generate-contents', function () {
-	return gulp.src(itcss())
-	.pipe(sgc(destStyles + '/main.scss', creds))
-	.pipe(gulp.dest(destStyles));
-});
-
-/* ============================================================ *\
     STYLES / SCSS
 \* ============================================================ */
 
@@ -97,37 +86,17 @@ gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
 });
 
 
-
-
-
-
-
+require('./gulpTasks/sprites.js')(gulp, config, destStyles);
+require('./gulpTasks/sass-generate-contents.js')(gulp, creds, destStyles);
 require('./gulpTasks/image-minify.js')(gulp, config, argv);
 require('./gulpTasks/copy-assets.js')(gulp, config);
 require('./gulpTasks/release.js')(gulp, creds);
 require('./gulpTasks/compile-html.js')(gulp);
 
 
-/* ============================================================ *\
-    SPRITES
-\* ============================================================ */
 
-gulp.task('sprites', function() {
-    return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
-        .pipe(plugins.svgSpritesheet({
-            cssPathNoSvg: '../' + config.dirs.images + '/sprite.png',
-            cssPathSvg: '../' + config.dirs.images + '/sprite.svg',
-            padding: 5,
-            pixelBase: config.pixelBaseNoUnit,
-            positioning: 'packed',
-            templateSrc: config.src + '/svg-sprite-sass.tpl',
-            templateDest: destStyles + '/_tools/_tools.sprites.scss',
-            units: 'em'
-        }))
-        .pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.svg'))
-        .pipe(plugins.svg2png())
-        .pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.png'));
-});
+
+
 
 /* ============================================================ *\
     LOCAL TESTING

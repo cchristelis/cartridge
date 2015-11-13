@@ -24,12 +24,12 @@ var gulp = require('gulp'),
 		destStyles = config.src + '/' + config.dirs.styles,
 		sourcemaps   = require('gulp-sourcemaps'),
 		// handlebars = require('gulp-compile-handlebars'),
-		pixrem = require('gulp-pixrem'),
+		pixrem = require('gulp-pixrem');
 		// rename = require('gulp-rename'),
 		// zip = require('gulp-zip'),
-        browserSync = require('browser-sync'),
-        nodemon = require('gulp-nodemon'),
-        gulpCache = require('gulp-cached');
+        // browserSync = require('browser-sync'),
+        // nodemon = require('gulp-nodemon'),
+        // gulpCache = require('gulp-cached');
         // handlebarsConfig = require('./_config/handlebars.json');
 
 /* ============================================================ *\
@@ -92,46 +92,7 @@ require('./gulpTasks/image-minify.js')(gulp, config, argv);
 require('./gulpTasks/copy-assets.js')(gulp, config);
 require('./gulpTasks/release.js')(gulp, creds);
 require('./gulpTasks/compile-html.js')(gulp);
-
-
-
-
-
-
-/* ============================================================ *\
-    LOCAL TESTING
-\* ============================================================ */
-
-gulp.task('browser-sync', function() {
-    browserSync.init(null, {
-        proxy: "http://localhost:3001",
-        files: [config.dest + '/' +  '**/*.*'],
-        browser: "google chrome",
-        port: 7000,
-        ui: {
-            port: 7001
-        }
-    }, function browserSyncCallback() {
-        console.log('browser-sync ready, listening on port: 7000')
-    });
-});
-
-
-gulp.task('localServer', function(cb) {
-
-    var started = false;
-
-    //Reload website.js if templateData file changes (among other files)
-    return nodemon({
-        script: 'website.js',
-        ext: 'js json'
-    }).on('start', function() {
-        if (!started) {
-            cb();
-            started = true;
-        }
-    });
-});
+require('./gulpTasks/local-testing.js')(gulp, config);
 
 /* ============================================================ *\
     MAIN TASKS

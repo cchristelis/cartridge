@@ -23,14 +23,14 @@ var gulp = require('gulp'),
 		itcss = require('./_config/itcss'),
 		destStyles = config.src + '/' + config.dirs.styles,
 		sourcemaps   = require('gulp-sourcemaps'),
-		handlebars = require('gulp-compile-handlebars'),
+		// handlebars = require('gulp-compile-handlebars'),
 		pixrem = require('gulp-pixrem'),
-		rename = require('gulp-rename'),
-		zip = require('gulp-zip'),
+		// rename = require('gulp-rename'),
+		// zip = require('gulp-zip'),
         browserSync = require('browser-sync'),
         nodemon = require('gulp-nodemon'),
-        gulpCache = require('gulp-cached'),
-        handlebarsConfig = require('./_config/handlebars.json');
+        gulpCache = require('gulp-cached');
+        // handlebarsConfig = require('./_config/handlebars.json');
 
 /* ============================================================ *\
     SCRIPTS JS / lint, concat and minify scripts
@@ -124,23 +124,9 @@ gulp.task('svgmin', function () {
         .pipe(gulp.dest(config.src + '/' + config.dirs.images));
 });
 
-/* ============================================================ *\
-    MOVE / Copy files 
-\* ============================================================ */
 
 
-gulp.task('copy:fonts', function(){
-	return gulp.src([config.src + '/' + config.dirs.fonts + '/**/*'])
-	.pipe(gulp.dest(config.dest + '/' + config.dirs.fonts));
-})
-
-gulp.task('copy', function(){
-	return gulp.src(['!' + config.dest + '/styles', '!' + config.dest + '/styles/*.map', config.dest + '/**/*'])
-	.pipe(gulp.dest(config.build));
-})
-
-
-
+require('./gulpTasks/copy-assets.js')(gulp, config);
 require('./gulpTasks/release.js')(gulp, creds);
 require('./gulpTasks/compile-html.js')(gulp);
 

@@ -51,18 +51,18 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('scripts:vendor', function(){
-    return gulp.src([config.src + '/' + config.dirs.scripts + '/vendor/*.js'])
-        .pipe(plugins.gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
-    .pipe(plugins.concat('bundle-critical.js'))
-    .pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
-    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
+	return gulp.src([config.src + '/' + config.dirs.scripts + '/vendor/*.js'])
+		.pipe(plugins.gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
+	.pipe(plugins.concat('bundle-critical.js'))
+	.pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
+	.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });
 
 gulp.task('scripts:ie', function(){
-    return gulp.src([config.src + '/' + config.dirs.scripts + '/ie/*.js'])
-    .pipe(plugins.concat('ie.js'))
-    .pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
-    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
+	return gulp.src([config.src + '/' + config.dirs.scripts + '/ie/*.js'])
+	.pipe(plugins.concat('ie.js'))
+	.pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
+	.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });
 
 /* ============================================================ *\
@@ -103,11 +103,11 @@ gulp.task('sass', ['sprites'],function () {
 });
 
 gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
-    return gulp.src(destStyles + '/ie8.scss')
-            .pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
-            .pipe(postcss([autoprefixer({ browsers: ['IE 8'] })]))
-            .pipe(pixrem(config.pixelBase))
-            .pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
+	return gulp.src(destStyles + '/ie8.scss')
+			.pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
+			.pipe(postcss([autoprefixer({ browsers: ['IE 8'] })]))
+			.pipe(pixrem(config.pixelBase))
+			.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
 });
 
 /* ============================================================ *\
@@ -126,15 +126,15 @@ gulp.task('imagemin', function () {
 });
 
 gulp.task('svgmin', function () {
-    return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
-        .pipe(plugins.svgmin({
-            plugins: [{
-                removeDimensions: true
-            }, {
-                removeTitle: true
-            }]
-        }))
-        .pipe(gulp.dest(config.src + '/' + config.dirs.images));
+	return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
+		.pipe(plugins.svgmin({
+			plugins: [{
+				removeDimensions: true
+			}, {
+				removeTitle: true
+			}]
+		}))
+		.pipe(gulp.dest(config.src + '/' + config.dirs.images));
 });
 
 /* ============================================================ *\
@@ -189,63 +189,63 @@ gulp.task('compile-html', function () {
 });
 
 /* ============================================================ *\
-    SPRITES
+	SPRITES
 \* ============================================================ */
 
 gulp.task('sprites', function() {
-    return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
-        .pipe(plugins.svgSpritesheet({
-            cssPathNoSvg: '../' + config.dirs.images + '/sprite.png',
-            cssPathSvg: '../' + config.dirs.images + '/sprite.svg',
-            padding: 5,
-            pixelBase: config.pixelBaseNoUnit,
-            positioning: 'packed',
-            templateSrc: config.src + '/svg-sprite-sass.tpl',
-            templateDest: destStyles + '/_tools/_tools.sprites.scss',
-            units: 'em'
-        }))
-        .pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.svg'))
-        .pipe(plugins.svg2png())
-        .pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.png'));
+	return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
+		.pipe(plugins.svgSpritesheet({
+			cssPathNoSvg: '../' + config.dirs.images + '/sprite.png',
+			cssPathSvg: '../' + config.dirs.images + '/sprite.svg',
+			padding: 5,
+			pixelBase: config.pixelBaseNoUnit,
+			positioning: 'packed',
+			templateSrc: config.src + '/svg-sprite-sass.tpl',
+			templateDest: destStyles + '/_tools/_tools.sprites.scss',
+			units: 'em'
+		}))
+		.pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.svg'))
+		.pipe(plugins.svg2png())
+		.pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.png'));
 });
 
 /* ============================================================ *\
-    LOCAL TESTING
+	LOCAL TESTING
 \* ============================================================ */
 
 gulp.task('browser-sync', function() {
-    browserSync.init(null, {
-        proxy: "http://localhost:3001",
-        files: [config.dest + '/' +  '**/*.*'],
-        browser: "google chrome",
-        port: 7000,
-        ui: {
-            port: 7001
-        }
-    }, function browserSyncCallback() {
-        console.log('browser-sync ready, listening on port: 7000')
-    });
+	browserSync.init(null, {
+		proxy: "http://localhost:3001",
+		files: [config.dest + '/' +  '**/*.*'],
+		browser: "google chrome",
+		port: 7000,
+		ui: {
+			port: 7001
+		}
+	}, function browserSyncCallback() {
+		console.log('browser-sync ready, listening on port: 7000')
+	});
 });
 
 
 gulp.task('localServer', function(cb) {
 
-    var started = false;
+	var started = false;
 
-    //Reload website.js if templateData file changes (among other files)
-    return plugins.nodemon({
-        script: 'website.js',
-        ext: 'js json'
-    }).on('start', function() {
-        if (!started) {
-            cb();
-            started = true;
-        }
-    });
+	//Reload website.js if templateData file changes (among other files)
+	return plugins.nodemon({
+		script: 'website.js',
+		ext: 'js json'
+	}).on('start', function() {
+		if (!started) {
+			cb();
+			started = true;
+		}
+	});
 });
 
 /* ============================================================ *\
-    MAIN TASKS
+	MAIN TASKS
 \* ============================================================ */
 
 
@@ -268,7 +268,7 @@ gulp.task('release', function (cb) {
 });
 
 gulp.task('serve', function(cb) {
-    runSeq(['localServer'], ['browser-sync'], cb);
+	runSeq(['localServer'], ['browser-sync'], cb);
 });
 
 gulp.task('default', function (cb) {

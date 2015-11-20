@@ -29,6 +29,7 @@
     "gulp-load-plugins": "^0.10.0",
     "gulp-minify-css": "^1.2.0",
     "gulp-pixrem": "0.1.1",
+    "gulp-postcss": "^6.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-sass-generate-contents": "^0.1.1",
@@ -41,8 +42,15 @@
     "yargs": "^3.18.0"
   },
   "devDependencies": {
+    "browser-sync": "^2.9.11",
     "chai": "^3.0.0",
     "fs-extra": "^0.24.0",
+    "gulp-cached": "^1.1.0",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-sass-generate-contents": "^0.1.1",
+    "gulp-svg-spritesheet": "0.0.4",
+    "gulp-svg2png": "^0.3.0",
+    "gulp-svgmin": "^1.2.0",
     "karma": "^0.13.10",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^0.2.0",

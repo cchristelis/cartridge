@@ -3,26 +3,20 @@
 
 	// Gulp
 var gulp            = require('gulp'),
-	plugins          = require('gulp-load-plugins')(),
-	gulpif           = require('gulp-if'),
+	plugins         = require('gulp-load-plugins')({
+        rename: {
+            'gulp-compile-handlebars' : 'handlebars',
+            'gulp-minify-css' : 'minifyCss',
+            'gulp-if' : 'gulpif'
+        }
+    }),
 
 	// Utilities
 	argv             = require('yargs').argv,
-	zip              = require('gulp-zip'),
-	sourcemaps       = require('gulp-sourcemaps'),
 	runSeq           = require('run-sequence'),
-	rename           = require('gulp-rename'),
-	concat           = require('gulp-concat'),
-
-	// Javascript
-	uglify           = require('gulp-uglify'),
-	jshint           = require('gulp-jshint'),
-
-	// Templates
-	handlebars       = require('gulp-compile-handlebars'),
+    browserSync      = require('browser-sync'),
 
 	// CSS
-	minifyCss        = require('gulp-minify-css'),
 	autoprefixer     = require('autoprefixer-core'),
 	sgc              = require('gulp-sass-generate-contents'),
 	postcss          = require('gulp-postcss'),
@@ -30,16 +24,16 @@ var gulp            = require('gulp'),
 	nano             = require('cssnano'),
 
 	// Images
-	imagemin         = require('gulp-imagemin'),
 	pngquant         = require('imagemin-pngquant'),
 
 	// Configuration
-	config           = require('./_config/project.json'),
-	templateDataJson = require('./_config/templateData.json'),
-	templateHelpers  = require('./_config/templateHelpers.js')(),
-	jshintConfig     = require('./_config/jshint.json'),
-	creds            = require('./_config/creds.json'),
-	itcss            = require('./_config/itcss'),
+    configDirectory = './_config/',
+	config           = require(configDirectory + 'project.json'),
+	templateDataJson = require(configDirectory + 'templateData.json'),
+	templateHelpers  = require(configDirectory + 'templateHelpers.js')(),
+	jshintConfig     = require(configDirectory + 'jshint.json'),
+	creds            = require(configDirectory + 'creds.json'),
+	itcss            = require(configDirectory + 'itcss'),
 	destStyles       = config.src + '/' + config.dirs.styles;
 
 /* ============================================================ *\
@@ -49,9 +43,9 @@ var gulp            = require('gulp'),
 
 gulp.task('scripts', function(){
 	return gulp.src([config.src + '/' + config.dirs.scripts + '/**/*.js'])
-		.pipe(gulpif(argv.prod, jshint(jshintConfig))) //Default only
-		.pipe(concat('bundle.js'))
-		.pipe(gulpif(argv.prod, uglify())) //Production only
+		.pipe(plugins.gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
+		.pipe(plugins.concat('bundle.js'))
+		.pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });
 
@@ -70,8 +64,7 @@ gulp.task('sass-generate-contents', function () {
 	STYLES / SCSS
 \* ============================================================ */
 
-
-gulp.task('sass', function () {
+gulp.task('sass', ['sprites'],function () {
 	var processors = [
 		autoprefixer({
 			browsers: ['> 5%', 'Android 3']
@@ -81,14 +74,15 @@ gulp.task('sass', function () {
 	if(argv.prod) {
 		processors.push(nano)
 	}
+
 	return gulp.src(destStyles + '/main.scss')
-		.pipe(gulpif(!argv.prod, plugins.sourcemaps.init())) //Default only
+		.pipe(plugins.gulpif(!argv.prod, plugins.sourcemaps.init())) //Default only
 		.pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
 		.pipe(postcss(processors))
 		.pipe(plugins.pixrem(config.pixelBase))
-		.pipe(gulpif(!argv.prod, plugins.sourcemaps.write('.'))) //Default only
+		.pipe(plugins.gulpif(!argv.prod, plugins.sourcemaps.write('.'))) //Default only
 		.pipe(plugins.pixrem(config.pixelBase))
-		.pipe(gulpif(argv.prod, minifyCss())) //Production only
+		.pipe(plugins.gulpif(argv.prod, plugins.minifyCss())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
 });
 
@@ -99,12 +93,24 @@ gulp.task('sass', function () {
 
 gulp.task('imagemin', function () {
 	return gulp.src(config.src + '/' + config.dirs.images + '/**/*')
-		.pipe(gulpif(argv.prod, imagemin({
+		.pipe(plugins.gulpif(argv.prod, plugins.imagemin({
 			progressive: true,
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		}))) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.images));
+});
+
+gulp.task('svgmin', function () {
+    return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
+        .pipe(plugins.svgmin({
+            plugins: [{
+                removeDimensions: true
+            }, {
+                removeTitle: true
+            }]
+        }))
+        .pipe(gulp.dest(config.src + '/' + config.dirs.images));
 });
 
 /* ============================================================ *\
@@ -133,7 +139,7 @@ gulp.task('package-release', function () {
 	var packageName = creds.packageName + '' + d.getDay() + '.' + d.getMonth() + '.' + d.getFullYear() + '_' + d.getHours() + '.' + d.getMinutes();
 
 	return gulp.src('build/**/*')
-		.pipe(zip(packageName + '.zip'))
+		.pipe(plugins.zip(packageName + '.zip'))
 		.pipe(gulp.dest('release'));
 });
 
@@ -153,21 +159,77 @@ gulp.task('compile-html', function () {
 	}
 
 	return gulp.src(['./views/*.hbs'])
-		.pipe(handlebars(templateData, options))
-		.pipe(rename({extname: '.html'}))
+		.pipe(plugins.handlebars(templateData, options))
+		.pipe(plugins.rename({extname: '.html'}))
 		.pipe(gulp.dest('build'));
 });
 
 /* ============================================================ *\
-	MAIN TASKS
+    SPRITES
+\* ============================================================ */
+
+gulp.task('sprites', function() {
+    return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
+        .pipe(plugins.svgSpritesheet({
+            cssPathNoSvg: '../' + config.dirs.images + '/sprite.png',
+            cssPathSvg: '../' + config.dirs.images + '/sprite.svg',
+            padding: 5,
+            pixelBase: config.pixelBaseNoUnit,
+            positioning: 'packed',
+            templateSrc: config.src + '/svg-sprite-sass.tpl',
+            templateDest: destStyles + '/_tools/_tools.sprites.scss',
+            units: 'em'
+        }))
+        .pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.svg'))
+        .pipe(plugins.svg2png())
+        .pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.png'));
+});
+
+/* ============================================================ *\
+    LOCAL TESTING
+\* ============================================================ */
+
+gulp.task('browser-sync', function() {
+    browserSync.init(null, {
+        proxy: "http://localhost:3001",
+        files: [config.dest + '/' +  '**/*.*'],
+        browser: "google chrome",
+        port: 7000,
+        ui: {
+            port: 7001
+        }
+    }, function browserSyncCallback() {
+        console.log('browser-sync ready, listening on port: 7000')
+    });
+});
+
+
+gulp.task('localServer', function(cb) {
+
+    var started = false;
+
+    //Reload website.js if templateData file changes (among other files)
+    return plugins.nodemon({
+        script: 'website.js',
+        ext: 'js json'
+    }).on('start', function() {
+        if (!started) {
+            cb();
+            started = true;
+        }
+    });
+});
+
+/* ============================================================ *\
+    MAIN TASKS
 \* ============================================================ */
 
 
 gulp.task('watch:sass', function () {
-	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
+	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
 });
 gulp.task('watch:js', function () {
-	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
+	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
 });
 gulp.task('watch', function (cb) {
 	runSeq(['watch:sass', 'watch:js'], cb);
@@ -179,6 +241,10 @@ gulp.task('build', function (cb) {
 
 gulp.task('release', function (cb) {
 	runSeq(['build'], ['package-release'],  cb);
+});
+
+gulp.task('serve', function(cb) {
+    runSeq(['localServer'], ['browser-sync'], cb);
 });
 
 gulp.task('default', function (cb) {

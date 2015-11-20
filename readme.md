@@ -28,7 +28,9 @@ Once you have the source code, you will need to do one of the following:
 * Run the following commands
     * `npm install` (sudo may be required for mac)
     * `gulp`
-    * `node website.js`
+    * `gulp serve` - this will open a local instance of the site for you ([See 'Viewing your site'](#viewing-your-site))
+
+Optional setup details can be found in [Welcome](welcome.md)
 
 #### Production and release files.
 
@@ -43,9 +45,13 @@ adding `--prod` after any command will compress and minify the relevant files.
 
 An index has page has puprposely been ommited from this setup to encourage you to build from a styleguide.
 
-Ensure you have a local server instance running using `node website.js` and then navigate to `http://localhost:3001`.
+Ensure you have a local server instance running using `gulp serve`. This creates a local instance of the site and a browser sync instance which proxies off of this.
 
-If you have run the `build` task you can navigate to the build folder and open the static HTML files.
+[Browser Sync](http://www.browsersync.io/) is a tool that allows for painless device testing using a host machine and accessed on port `http://localhost:7000` locally with external devices able to connect to it through the host's ip that is displayed on screen e.g.`192.168.0.1:7000`. Using Browser Sync, any scroll or page interactions are mirrored on all devices and pages are reloaded whenever styles are changed.
+
+The local server can be accessed directly via `http://localhost:3001`
+
+If you have run the `gulp build` task you can navigate to the build folder and open the static HTML files.
 
 ## HTML Template Data
 

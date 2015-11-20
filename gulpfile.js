@@ -27,6 +27,7 @@ var gulp            = require('gulp'),
 	sgc              = require('gulp-sass-generate-contents'),
 	postcss          = require('gulp-postcss'),
 	pixrem           = require('gulp-pixrem'),
+	nano             = require('cssnano'),
 
 	// Images
 	imagemin         = require('gulp-imagemin'),
@@ -71,10 +72,19 @@ gulp.task('sass-generate-contents', function () {
 
 
 gulp.task('sass', function () {
+	var processors = [
+		autoprefixer({
+			browsers: ['> 5%', 'Android 3']
+		})
+	];
+
+	if(argv.prod) {
+		processors.push(nano)
+	}
 	return gulp.src(destStyles + '/main.scss')
 		.pipe(gulpif(!argv.prod, plugins.sourcemaps.init())) //Default only
 		.pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
-		.pipe(postcss([autoprefixer({ browsers: ['> 5%', 'Android 3'] })]))
+		.pipe(postcss(processors))
 		.pipe(plugins.pixrem(config.pixelBase))
 		.pipe(gulpif(!argv.prod, plugins.sourcemaps.write('.'))) //Default only
 		.pipe(plugins.pixrem(config.pixelBase))

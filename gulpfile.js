@@ -4,17 +4,17 @@
 	// Gulp
 var gulp            = require('gulp'),
 	plugins         = require('gulp-load-plugins')({
-        rename: {
-            'gulp-compile-handlebars' : 'handlebars',
-            'gulp-minify-css' : 'minifyCss',
-            'gulp-if' : 'gulpif'
-        }
-    }),
+		rename: {
+			'gulp-compile-handlebars' : 'handlebars',
+			'gulp-minify-css' : 'minifyCss',
+			'gulp-if' : 'gulpif'
+		}
+	}),
 
 	// Utilities
 	argv             = require('yargs').argv,
 	runSeq           = require('run-sequence'),
-    browserSync      = require('browser-sync'),
+	browserSync      = require('browser-sync'),
 
 	// CSS
 	autoprefixer     = require('autoprefixer-core'),
@@ -27,13 +27,14 @@ var gulp            = require('gulp'),
 	pngquant         = require('imagemin-pngquant'),
 
 	// Configuration
-    configDirectory = './_config/',
+	configDirectory = './_config/',
 	config           = require(configDirectory + 'project.json'),
 	templateDataJson = require(configDirectory + 'templateData.json'),
 	templateHelpers  = require(configDirectory + 'templateHelpers.js')(),
 	jshintConfig     = require(configDirectory + 'jshint.json'),
 	creds            = require(configDirectory + 'creds.json'),
 	itcss            = require(configDirectory + 'itcss'),
+	handlebarsConfig = require('./_config/handlebars.json'),
 	destStyles       = config.src + '/' + config.dirs.styles;
 
 /* ============================================================ *\
@@ -47,6 +48,21 @@ gulp.task('scripts', function(){
 		.pipe(plugins.concat('bundle.js'))
 		.pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
+});
+
+gulp.task('scripts:vendor', function(){
+    return gulp.src([config.src + '/' + config.dirs.scripts + '/vendor/*.js'])
+        .pipe(plugins.gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
+    .pipe(plugins.concat('bundle-critical.js'))
+    .pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
+    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
+});
+
+gulp.task('scripts:ie', function(){
+    return gulp.src([config.src + '/' + config.dirs.scripts + '/ie/*.js'])
+    .pipe(plugins.concat('ie.js'))
+    .pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
+    .pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
 });
 
 /* ============================================================ *\
@@ -84,6 +100,14 @@ gulp.task('sass', ['sprites'],function () {
 		.pipe(plugins.pixrem(config.pixelBase))
 		.pipe(plugins.gulpif(argv.prod, plugins.minifyCss())) //Production only
 		.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
+});
+
+gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
+    return gulp.src(destStyles + '/ie8.scss')
+            .pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
+            .pipe(postcss([autoprefixer({ browsers: ['IE 8'] })]))
+            .pipe(pixrem(config.pixelBase))
+            .pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
 });
 
 /* ============================================================ *\
@@ -154,11 +178,11 @@ gulp.task('compile-html', function () {
 	},
 
 	options = {
-		batch : ['./views/_partials'],
+		batch : handlebarsConfig.partials,
 		helpers: templateHelpers
 	}
 
-	return gulp.src(['./views/*.hbs'])
+	return gulp.src(handlebarsConfig.views)
 		.pipe(plugins.handlebars(templateData, options))
 		.pipe(plugins.rename({extname: '.html'}))
 		.pipe(gulp.dest('build'));
@@ -248,5 +272,5 @@ gulp.task('serve', function(cb) {
 });
 
 gulp.task('default', function (cb) {
-	runSeq(['sass-generate-contents'],['sass', 'scripts', 'copy:fonts', 'imagemin'], cb);
+	runSeq(['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], ['sass:legacy:ie8'], cb);
 });

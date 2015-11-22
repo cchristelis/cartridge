@@ -11,7 +11,7 @@ var express = require('express'),
 	chalk = require('chalk');
 
 website.engine('hbs', exphbs({
-	extname:'hbs', 
+	extname:'hbs',
 	defaultLayout:'index.hbs',
 	partialsDir: ['views/_partials']
 }));

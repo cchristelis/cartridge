@@ -30,15 +30,15 @@ require('./gulpTasks/compile-html.js')(gulp);
 require('./gulpTasks/local-testing.js')(gulp, config);
 
 /* ============================================================ *\
-    MAIN TASKS
+	MAIN TASKS
 \* ============================================================ */
 
 gulp.task('watch:sass', function () {
-	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
+	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
 });
 
 gulp.task('watch:js', function () {
-	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
+	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
 });
 
 gulp.task('watch', function (cb) {
@@ -54,7 +54,7 @@ gulp.task('release', function (cb) {
 });
 
 gulp.task('serve', function(cb) {
-    runSeq(['localServer'], ['browser-sync'], cb);
+	runSeq(['localServer'], ['browser-sync'], cb);
 });
 
 gulp.task('default', function (cb) {

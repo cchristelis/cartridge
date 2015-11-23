@@ -34,11 +34,11 @@ require('./gulpTasks/local-testing.js')(gulp, config);
 \* ============================================================ */
 
 gulp.task('watch:sass', function () {
-	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
+	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
 });
 
 gulp.task('watch:js', function () {
-	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
+	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
 });
 
 gulp.task('watch', function (cb) {

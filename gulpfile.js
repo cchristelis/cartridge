@@ -6,14 +6,17 @@
 'use strict';
 
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
+
 var argv = require('yargs').argv;
 var runSeq = require('run-sequence');
+
 var config = require('./_config/project.json');
 var creds = require('./_config/creds.json');
 var destStyles = config.src + '/' + config.dirs.styles;
 
 /* ============================================================ *\
-    TASKS
+    TASK MODULES
 \* ============================================================ */
 
 require('./gulpTasks/styles.js')(gulp, config, argv, destStyles);

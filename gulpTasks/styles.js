@@ -32,7 +32,7 @@ var stylesConfig = {
     }
 };
 
-module.exports = function(gulp, config, argv, destStyles) {
+module.exports = function(gulp, config, argv) {
 
     var sassConfig = {
         errLogToConsole: true,
@@ -62,24 +62,24 @@ module.exports = function(gulp, config, argv, destStyles) {
 
     gulp.task('sass-generate-contents', function () {
         return gulp.src(itcss())
-            .pipe(sgc(destStyles + '/main.scss', creds))
-            .pipe(gulp.dest(destStyles));
+            .pipe(sgc(config.paths.src.styles + 'main.scss', creds))
+            .pipe(gulp.dest(config.paths.src.styles));
     });
 
     gulp.task('sass', ['sprites'],function () {
-        return gulp.src(destStyles + '/main.scss')
+        return gulp.src(config.paths.src.styles + 'main.scss')
             .pipe(gulpif(!argv.prod, sourcemaps.init())) //Default only
             .pipe(sass(sassConfig))
             .pipe(postcss(getPostCssPlugins(stylesConfig.browsers.normal)))
             .pipe(gulpif(!argv.prod, sourcemaps.write('.'))) //Default only
-            .pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
+            .pipe(gulp.dest(config.paths.dest.styles));
     });
 
     gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
-        return gulp.src(destStyles + '/ie8.scss')
+        return gulp.src(config.paths.src.styles + 'ie8.scss')
             .pipe(sass(sassConfig))
             .pipe(postcss(getPostCssPlugins(stylesConfig.browsers.ie8)))
-            .pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
+            .pipe(gulp.dest(config.paths.dest.styles));
     });
 
 }

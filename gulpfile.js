@@ -15,13 +15,12 @@ var config     = require('./_config/project.json');
 var creds      = require('./_config/creds.json');
 
 config.paths   = require('./_config/paths')(config);
-var destStyles = config.src + '/' + config.dirs.styles;
 
 /* ============================================================ *\
     TASK MODULES
 \* ============================================================ */
 
-require('./gulpTasks/styles.js')(gulp, config, argv, destStyles);
+require('./gulpTasks/styles.js')(gulp, config, argv);
 require('./gulpTasks/scripts.js')(gulp, config, argv);
 require('./gulpTasks/sprites.js')(gulp, config);
 require('./gulpTasks/image-minify.js')(gulp, config, argv);

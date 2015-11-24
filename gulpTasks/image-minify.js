@@ -9,17 +9,17 @@ var svgmin = require('gulp-svgmin');
 
 module.exports = function(gulp, config, argv) {
     gulp.task('imagemin', function () {
-        return gulp.src(config.src + '/' + config.dirs.images + '/**/*')
+        return gulp.src(config.paths.src.images + '**/*')
             .pipe(gulpif(argv.prod, imagemin({
                 progressive: true,
                 svgoPlugins: [{removeViewBox: false}],
                 use: [pngquant()]
             }))) //Production only
-            .pipe(gulp.dest(config.dest + '/' + config.dirs.images));
+            .pipe(gulp.dest(config.paths.dest.images));
     });
 
     gulp.task('svgmin', function () {
-        return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
+        return gulp.src(config.paths.src.images + '**/*.svg')
             .pipe(svgmin({
                 plugins: [{
                     removeDimensions: true
@@ -27,6 +27,6 @@ module.exports = function(gulp, config, argv) {
                     removeTitle: true
                 }]
             }))
-            .pipe(gulp.dest(config.src + '/' + config.dirs.images));
+            .pipe(gulp.dest(config.paths.dest.images));
     });
 }

@@ -22,7 +22,6 @@ var destStyles = config.src + '/' + config.dirs.styles;
 require('./gulpTasks/styles.js')(gulp, config, argv, destStyles);
 require('./gulpTasks/scripts.js')(gulp, config, argv);
 require('./gulpTasks/sprites.js')(gulp, config, destStyles);
-require('./gulpTasks/sass-generate-contents.js')(gulp, creds, destStyles);
 require('./gulpTasks/image-minify.js')(gulp, config, argv);
 require('./gulpTasks/copy-assets.js')(gulp, config);
 require('./gulpTasks/release.js')(gulp, creds);

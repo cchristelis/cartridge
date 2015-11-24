@@ -4,12 +4,12 @@
     SCRIPTS JS / lint, concat and minify scripts
 \* ============================================================ */
 
-// Grunt dependencies
+// Gulp dependencies
 var sourcemaps   = require('gulp-sourcemaps');
 var gulpif       = require('gulp-if')
 var concat       = require('gulp-concat');
 
-// Javascript dependencies
+// JavaScript dependencies
 var jshint       = require('gulp-jshint');
 var uglify       = require('gulp-uglify');
 

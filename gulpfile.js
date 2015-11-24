@@ -1,260 +1,46 @@
+/* ============================================================ *\
+    SETUP
+\* ============================================================ */
+
 /*jslint node: true */
 'use strict';
 
-	// Gulp
-var gulp            = require('gulp'),
-	plugins         = require('gulp-load-plugins')({
-		rename: {
-			'gulp-compile-handlebars' : 'handlebars',
-			'gulp-minify-css' : 'minifyCss',
-			'gulp-if' : 'gulpif'
-		}
-	}),
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
 
-	// Utilities
-	argv             = require('yargs').argv,
-	runSeq           = require('run-sequence'),
-	browserSync      = require('browser-sync'),
+var argv = require('yargs').argv;
+var runSeq = require('run-sequence');
 
-	// CSS
-	autoprefixer     = require('autoprefixer-core'),
-	sgc              = require('gulp-sass-generate-contents'),
-	postcss          = require('gulp-postcss'),
-	pixrem           = require('gulp-pixrem'),
-	nano             = require('cssnano'),
-
-	// Images
-	pngquant         = require('imagemin-pngquant'),
-
-	// Configuration
-	configDirectory = './_config/',
-	config           = require(configDirectory + 'project.json'),
-	templateDataJson = require(configDirectory + 'templateData.json'),
-	templateHelpers  = require(configDirectory + 'templateHelpers.js')(),
-	jshintConfig     = require(configDirectory + 'jshint.json'),
-	creds            = require(configDirectory + 'creds.json'),
-	itcss            = require(configDirectory + 'itcss'),
-	handlebarsConfig = require('./_config/handlebars.json'),
-	destStyles       = config.src + '/' + config.dirs.styles;
+var config = require('./_config/project.json');
+var creds = require('./_config/creds.json');
+var destStyles = config.src + '/' + config.dirs.styles;
 
 /* ============================================================ *\
-	SCRIPTS JS / lint, concat and minify scripts
+    TASK MODULES
 \* ============================================================ */
 
-
-gulp.task('scripts', function(){
-	return gulp.src([config.src + '/' + config.dirs.scripts + '/**/*.js'])
-		.pipe(plugins.gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
-		.pipe(plugins.concat('bundle.js'))
-		.pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
-		.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
-});
-
-gulp.task('scripts:vendor', function(){
-	return gulp.src([config.src + '/' + config.dirs.scripts + '/vendor/*.js'])
-		.pipe(plugins.gulpif(argv.prod, plugins.jshint(jshintConfig))) //Default only
-	.pipe(plugins.concat('bundle-critical.js'))
-	.pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
-	.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
-});
-
-gulp.task('scripts:ie', function(){
-	return gulp.src([config.src + '/' + config.dirs.scripts + '/ie/*.js'])
-	.pipe(plugins.concat('ie.js'))
-	.pipe(plugins.gulpif(argv.prod, plugins.uglify())) //Production only
-	.pipe(gulp.dest(config.dest + '/' + config.dirs.scripts));
-});
-
-/* ============================================================ *\
-	GENERATE SASS IMPORTS AND
-\* ============================================================ */
-
-
-gulp.task('sass-generate-contents', function () {
-	return gulp.src(itcss())
-	.pipe(sgc(destStyles + '/main.scss', creds))
-	.pipe(gulp.dest(destStyles));
-});
-
-/* ============================================================ *\
-	STYLES / SCSS
-\* ============================================================ */
-
-gulp.task('sass', ['sprites'],function () {
-	var processors = [
-		autoprefixer({
-			browsers: ['> 5%', 'Android 3']
-		})
-	];
-
-	if(argv.prod) {
-		processors.push(nano)
-	}
-
-	return gulp.src(destStyles + '/main.scss')
-		.pipe(plugins.gulpif(!argv.prod, plugins.sourcemaps.init())) //Default only
-		.pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
-		.pipe(postcss(processors))
-		.pipe(plugins.pixrem(config.pixelBase))
-		.pipe(plugins.gulpif(!argv.prod, plugins.sourcemaps.write('.'))) //Default only
-		.pipe(plugins.pixrem(config.pixelBase))
-		.pipe(plugins.gulpif(argv.prod, plugins.minifyCss())) //Production only
-		.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
-});
-
-gulp.task('sass:legacy:ie8', ['sprites'] ,function () {
-	return gulp.src(destStyles + '/ie8.scss')
-			.pipe(plugins.sass({ errLogToConsole: true, includePaths: [config.dirs.components], outputStyle: 'compact' }))
-			.pipe(postcss([autoprefixer({ browsers: ['IE 8'] })]))
-			.pipe(pixrem(config.pixelBase))
-			.pipe(gulp.dest(config.dest + '/' + config.dirs.styles));
-});
-
-/* ============================================================ *\
-	IMAGES / minify images
-\* ============================================================ */
-
-
-gulp.task('imagemin', function () {
-	return gulp.src(config.src + '/' + config.dirs.images + '/**/*')
-		.pipe(plugins.gulpif(argv.prod, plugins.imagemin({
-			progressive: true,
-			svgoPlugins: [{removeViewBox: false}],
-			use: [pngquant()]
-		}))) //Production only
-		.pipe(gulp.dest(config.dest + '/' + config.dirs.images));
-});
-
-gulp.task('svgmin', function () {
-	return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
-		.pipe(plugins.svgmin({
-			plugins: [{
-				removeDimensions: true
-			}, {
-				removeTitle: true
-			}]
-		}))
-		.pipe(gulp.dest(config.src + '/' + config.dirs.images));
-});
-
-/* ============================================================ *\
-	MOVE / Copy files
-\* ============================================================ */
-
-
-gulp.task('copy:fonts', function(){
-	return gulp.src([config.src + '/' + config.dirs.fonts + '/**/*'])
-		.pipe(gulp.dest(config.dest + '/' + config.dirs.fonts));
-})
-
-gulp.task('copy', function(){
-	return gulp.src(['!' + config.dest + '/styles', '!' + config.dest + '/styles/*.map', config.dest + '/**/*'])
-		.pipe(gulp.dest(config.build));
-})
-
-/* ============================================================ *\
-	PACKAGE THE FOLDER UP
-\* ============================================================ */
-
-
-gulp.task('package-release', function () {
-
-	var d = new Date();
-	var packageName = creds.packageName + '' + d.getDay() + '.' + d.getMonth() + '.' + d.getFullYear() + '_' + d.getHours() + '.' + d.getMinutes();
-
-	return gulp.src('build/**/*')
-		.pipe(plugins.zip(packageName + '.zip'))
-		.pipe(gulp.dest('release'));
-});
-
-/* ============================================================ *\
-	COMPILE TEMPLATES / HTML
-\* ============================================================ */
-
-
-gulp.task('compile-html', function () {
-	var templateData = {
-		data: templateDataJson
-	},
-
-	options = {
-		batch : handlebarsConfig.partials,
-		helpers: templateHelpers
-	}
-
-	return gulp.src(handlebarsConfig.views)
-		.pipe(plugins.handlebars(templateData, options))
-		.pipe(plugins.rename({extname: '.html'}))
-		.pipe(gulp.dest('build'));
-});
-
-/* ============================================================ *\
-	SPRITES
-\* ============================================================ */
-
-gulp.task('sprites', function() {
-	return gulp.src(config.src + '/' + config.dirs.images + '/**/*.svg')
-		.pipe(plugins.svgSpritesheet({
-			cssPathNoSvg: '../' + config.dirs.images + '/sprite.png',
-			cssPathSvg: '../' + config.dirs.images + '/sprite.svg',
-			padding: 5,
-			pixelBase: config.pixelBaseNoUnit,
-			positioning: 'packed',
-			templateSrc: config.src + '/svg-sprite-sass.tpl',
-			templateDest: destStyles + '/_tools/_tools.sprites.scss',
-			units: 'em'
-		}))
-		.pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.svg'))
-		.pipe(plugins.svg2png())
-		.pipe(gulp.dest(config.dest + '/' + config.dirs.images + '/sprite.png'));
-});
-
-/* ============================================================ *\
-	LOCAL TESTING
-\* ============================================================ */
-
-gulp.task('browser-sync', function() {
-	browserSync.init(null, {
-		proxy: "http://localhost:3001",
-		files: [config.dest + '/' +  '**/*.*'],
-		browser: "google chrome",
-		port: 7000,
-		ui: {
-			port: 7001
-		}
-	}, function browserSyncCallback() {
-		console.log('browser-sync ready, listening on port: 7000')
-	});
-});
-
-
-gulp.task('localServer', function(cb) {
-
-	var started = false;
-
-	//Reload website.js if templateData file changes (among other files)
-	return plugins.nodemon({
-		script: 'website.js',
-		ext: 'js json'
-	}).on('start', function() {
-		if (!started) {
-			cb();
-			started = true;
-		}
-	});
-});
+require('./gulpTasks/styles.js')(gulp, config, argv, destStyles);
+require('./gulpTasks/scripts.js')(gulp, config, argv);
+require('./gulpTasks/sprites.js')(gulp, config, destStyles);
+require('./gulpTasks/sass-generate-contents.js')(gulp, creds, destStyles);
+require('./gulpTasks/image-minify.js')(gulp, config, argv);
+require('./gulpTasks/copy-assets.js')(gulp, config);
+require('./gulpTasks/release.js')(gulp, creds);
+require('./gulpTasks/compile-html.js')(gulp);
+require('./gulpTasks/local-testing.js')(gulp, config);
 
 /* ============================================================ *\
 	MAIN TASKS
 \* ============================================================ */
 
-
 gulp.task('watch:sass', function () {
-	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
+	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
 });
+
 gulp.task('watch:js', function () {
-	plugins.gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
+	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
 });
+
 gulp.task('watch', function (cb) {
 	runSeq(['watch:sass', 'watch:js'], cb);
 });

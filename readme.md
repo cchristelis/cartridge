@@ -30,7 +30,7 @@ Once you have the source code, you will need to do one of the following:
     * `gulp`
     * `gulp serve` - this will open a local instance of the site for you ([See 'Viewing your site'](#viewing-your-site))
 
-Optional setup details can be found in [Welcome](welcome.md)
+Optional setup details can be found in [Welcome](docs/welcome.md)
 
 #### Production and release files.
 

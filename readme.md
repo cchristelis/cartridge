@@ -8,7 +8,7 @@
 
 This repository holds the standard Sass, JavaScript and Testing suite to act as development base.
 
-The site uses [Gulp](https://www.google.com) as a task runner along with a few [3rd party tools](docs/3rd-party-plugins.md)
+The site uses [Gulp](https://www.google.com) as a task runner along with a few [3rd party tools](docs/3rd-party-plugins.md).
 
 The site is setup to use Harry Roberts [csswizardry's](https://github.com/csswizardry) ITCSS (inverted triangle) methodology. See [Managing CSS Projects with ITCSS](https://speakerdeck.com/dafed/managing-css-projects-with-itcss) for further details.
 
@@ -18,6 +18,7 @@ It also gives you the ability to package the site up with all the necessarry fil
 
 ## Installation
 
+* Clone the repo - `https://github.com/code-computerlove/node-static-site-generator.git`
 * Open a new command prompt (or Terminal on mac).
 * Navigate to the folder
 * Run the following commands

@@ -5,23 +5,24 @@
 /*jslint node: true */
 'use strict';
 
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
+// Gulp
+var gulp       = require('gulp');
+var argv       = require('yargs').argv;
+var runSeq     = require('run-sequence');
 
-var argv = require('yargs').argv;
-var runSeq = require('run-sequence');
+// Config
+var config     = require('./_config/project.json');
+var creds      = require('./_config/creds.json');
 
-var config = require('./_config/project.json');
-var creds = require('./_config/creds.json');
-var destStyles = config.src + '/' + config.dirs.styles;
+config.paths   = require('./_config/paths')(config);
 
 /* ============================================================ *\
     TASK MODULES
 \* ============================================================ */
 
-require('./gulpTasks/styles.js')(gulp, config, argv, destStyles);
+require('./gulpTasks/styles.js')(gulp, config, argv);
 require('./gulpTasks/scripts.js')(gulp, config, argv);
-require('./gulpTasks/sprites.js')(gulp, config, destStyles);
+require('./gulpTasks/sprites.js')(gulp, config);
 require('./gulpTasks/image-minify.js')(gulp, config, argv);
 require('./gulpTasks/copy-assets.js')(gulp, config);
 require('./gulpTasks/release.js')(gulp, creds);
@@ -33,11 +34,21 @@ require('./gulpTasks/local-testing.js')(gulp, config);
 \* ============================================================ */
 
 gulp.task('watch:sass', function () {
-	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.styles + '/**/*.scss', config.dirs.components + '/**/*.scss'], ['sass']));
+	if(!argv.prod) {
+		gulp.watch(
+			[config.paths.src.styles + '**/*.scss', config.dirs.components + '**/*.scss'],
+			['sass']
+		);
+	}
 });
 
 gulp.task('watch:js', function () {
-	gulpif(!argv.prod, gulp.watch([config.src + '/' + config.dirs.scripts + '/**/*.js', config.dirs.components + '/**/*.js'], ['scripts']));
+	if(!argv.prod) {
+		gulp.watch(
+			[config.paths.src.scripts + '**/*.js', config.dirs.components + '/**/*.js'],
+			['scripts']
+		);
+	}
 });
 
 gulp.task('watch', function (cb) {

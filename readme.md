@@ -10,8 +10,6 @@ This repository holds the standard Sass, JavaScript and Testing suite to act as 
 
 The site uses [Gulp](https://www.google.com) as a task runner along with a few [3rd party tools](docs/3rd-party-plugins.md).
 
-The site is setup to use Harry Roberts [csswizardry's](https://github.com/csswizardry) ITCSS (inverted triangle) methodology. See [Managing CSS Projects with ITCSS](https://speakerdeck.com/dafed/managing-css-projects-with-itcss) for further details.
-
 This setup will enable you to run a local node server instance of a website. Through the use of handlebars templating you will be able to compile your website into pre-compiled static HTML files.
 
 It also gives you the ability to package the site up with all the necessarry files.

@@ -16,13 +16,14 @@ describe('As a dev', function() {
 
             var files = [
                 'creds.json',
+                'handlebars.json',
                 'itcss.js',
                 'jshint.json',
+                'paths.js',
                 'project.json',
                 'sass.json',
                 'templateData.json',
                 'templateHelpers.js',
-                'handlebars.json'
             ];
 
             files.forEach(function(fileName) {

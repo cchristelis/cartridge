@@ -6,17 +6,22 @@
 
 > Get yourself going with a ready made basic static website setup
 
-This repository holds the standard Sass, JavaScript and Testing suite to act as development base.
+This repository holds the standard Sass, JavaScript and Testing suit for any website at start level.
 
 The site uses [Gulp](https://www.google.com) as a task runner.
 
 The site is setup to use Harry Roberts [csswizardry's](https://github.com/csswizardry) ITCSS (inverted triangle) methodology. See [Managing CSS Projects with ITCSS](https://speakerdeck.com/dafed/managing-css-projects-with-itcss) for further details.
 
 This setup will enable you to run a local node server instance of a website. Through the use of handlebars templating you will be able to compile your website into pre-compiled static HTML files.
-
 It also gives you the ability to package the site up with all the necessarry files.
 
 ## Installation
+
+* Clone the git repo - `https://github.com/code-computerlove/node-static-site-generator.git`
+
+Once you have the source code, you will need to do one of the following:
+
+#### Gulp (Client side setup).
 
 * Open a new command prompt (or Terminal on mac).
 * Navigate to the folder
@@ -36,31 +41,22 @@ If you need to compile your templates
 
 adding `--prod` after any command will compress and minify the relevant files.
 
-## Viewing your site
+##  Testing
 
-An index has page has puprposely been ommited from this setup to encourage you to build from a styleguide.
+Included as part of the installation are all required dependencies for unit testing using PhantomJS, Karma, Mocha and assertion library chai. These are stored inside of the `test` folder. These can be run by running `npm test` from the root of the project.
 
-Ensure you have a local server instance running using `gulp serve`. This creates a local instance of the site and a browser sync instance which proxies off of this.
+The generator itself has tests and are stored seperatly in the folder `generatorTests` along with it's own package file. The entire contents of this folder is to test the correct function of the generator itself e.g. certain files / folders exist and that certain files / folders are created after build tasks.
 
-[Browser Sync](http://www.browsersync.io/) is a tool that allows for painless device testing using a host machine and accessed on port `http://localhost:7000` locally with external devices able to connect to it through the host's ip that is displayed on screen e.g.`192.168.0.1:7000`. Using Browser Sync, any scroll or page interactions are mirrored on all devices and pages are reloaded whenever styles are changed.
+To this end, after installation, the whole of the `generatorTests` folder **CAN BE** deleted and **WILL NOT** affect to the rest of the files or output.
 
-The local server can be accessed directly via `http://localhost:3001`
+### Contributing 
 
-If you have run the `gulp build` task you can navigate to the build folder and open the static HTML files.
 
-## Building your site
 
-#### HTML Template Data
-
-Template data is stored in the `templateData.json` file located in `_config` folder. Anything stored in this file is piped to the handlebars templates under the `data` namespace. If you want to output the value of the key `pageHeading` this would be done via `{{ data.pageHeading }}` (The double brackets tell handlebars to output a dynamic value). As this file is standard json - arrays and objects can be added and used for template loops, passed to partials etc without issue.
-
-## Coding Standards
-
-* [ITCSS (Inverted Triangle CSS)](https://speakerdeck.com/dafed/managing-css-projects-with-itcss)
-
-## Contributing
-
-* [Testing](docs/contributing/testing.md)
+- Ensure mocha is installed (preferrably globally) - `npm install -g mocha`
+- Open a command line tool and go into the generator tests folder e.g `cd generatorTest`
+- Install all of the dependencies using `npm install`. These are seperate from the base dependencies and includes tools specific to running the tests.
+- Still inside the `generatorTests` folder, run the command `mocha`. This will run all test files in the `test` folder. **As these tests may test the gulp output, be prepared for any and all gulp tasks to be run (such as creating folders, files etc)**.
 
 ### 3rd party plugin notes.
 

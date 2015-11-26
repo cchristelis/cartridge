@@ -61,10 +61,10 @@ When referencing fonts in the styles, reference them as:
 
 ##Setting the default development homepage
 
-By default, the development server directs to the inbuilt styleguide if a view file cannot be found. To change this, in the file `styleguide.js` change line 28 to be the view name that you want to act as the homepage / default. For example, changing it to the following will make the root level `index.hbs` file act as the default homepage.
+By default, the development server directs to a placeholder index view if a view file cannot be found. To change this, in the file `main.js` change line 28 to be the view name that you want to act as the homepage / default. For example, changing it to the following will make the root level `styleguide.hbs` file act as the default homepage.
 
 ```
-url = 'index'
+url = 'styleguide'
 ```
 
 ##Pretty URLs

@@ -67,6 +67,10 @@ gulp.task('serve', function(cb) {
 	runSeq(['localServer'], ['browser-sync'], cb);
 });
 
+gulp.task('dev', function(cb) {
+	runSeq(['default'], ['watch', 'serve'], cb);
+});
+
 gulp.task('default', function (cb) {
 	runSeq(['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], ['sass:legacy:ie8'], cb);
 });

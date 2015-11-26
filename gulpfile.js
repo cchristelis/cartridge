@@ -36,7 +36,7 @@ require('./gulpTasks/local-testing.js')(gulp, config);
 gulp.task('watch:sass', function () {
 	if(!argv.prod) {
 		gulp.watch(
-			[config.paths.src.styles + '**/*.scss', config.dirs.components + '**/*.scss'],
+			[config.paths.src.styles + '**/*.scss', config.paths.src.components + '**/*.scss'],
 			['sass']
 		);
 	}
@@ -45,7 +45,7 @@ gulp.task('watch:sass', function () {
 gulp.task('watch:js', function () {
 	if(!argv.prod) {
 		gulp.watch(
-			[config.paths.src.scripts + '**/*.js', config.dirs.components + '/**/*.js'],
+			[config.paths.src.scripts + '**/*.js', config.paths.src.components + '/**/*.js'],
 			['scripts']
 		);
 	}

@@ -36,7 +36,7 @@ module.exports = function(gulp, config, argv) {
 
     var sassConfig = {
         errLogToConsole: true,
-        includePaths:    [config.dirs.components],
+        includePaths:    [config.paths.src.components],
         outputStyle:     'compact'
     };
 

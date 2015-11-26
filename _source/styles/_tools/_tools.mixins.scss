@@ -91,15 +91,11 @@ $old-ie-8: false !default;
 
 // transition
 @mixin transition {
-    -webkit-transition:all 0.3s ease;
-    -moz-transition:all 0.3s ease;
-    -o-transition:all 0.3s ease;
-    -ms-transition:all 0.3s ease;
     transition:all 0.3s ease;
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    perspective: 1000;
+    transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    -webkit-transform-style: preserve-3d;
 }
 
 @mixin placeholder {

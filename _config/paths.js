@@ -5,7 +5,7 @@ function getConfig(paths) {
 
 	var config =  {
 		src: {
-			components: paths.dirs.components,
+			components: paths.dirs.components + _DIR,
 			fonts:      paths.src + _DIR + paths.dirs.fonts + _DIR,
 			images:     paths.src + _DIR + paths.dirs.images + _DIR,
 			scripts:    paths.src + _DIR + paths.dirs.scripts + _DIR,

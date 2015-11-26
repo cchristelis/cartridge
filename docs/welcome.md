@@ -41,7 +41,7 @@ Partials can be made a modular as required - allowing you to have a `button` and
 
 ##Adding images
 
-Creating the directory `images` in the `_source` directory will mean that anything inside of this folder is copied over during the build process.
+The directory `images` in the `_source` directory is copied over during the build process.
 
 This folder is copied to the `public` folder whenever the `gulp` task is run **and will need to be re-run when adding new images**
 

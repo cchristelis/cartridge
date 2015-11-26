@@ -10,6 +10,7 @@ Assuming you have cloned the repo and done your first gulp, here are a few thing
 * [Adding Project Credentials](#adding-project-credentials)
 * [Adding images](#adding-images)
 * [Adding custom fonts](#adding-custom-fonts)
+* [Setting the default development homepage](#setting-the-default-development-homepage)
 * [Pretty URLs](#pretty-urls)
 
 ---

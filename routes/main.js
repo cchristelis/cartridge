@@ -24,8 +24,8 @@ var WebsiteController = function (website) {
 
 	function parseUrl(url){
 		if(url === '/' || url === '' || url === undefined || url === 'favicon.ico'){
-			// change to index or homepage when ready to work on site pages
-			url = 'styleguide'
+			// this acts as the default view file when working locally
+			url = 'index'
 		}
 		return url;
 	}

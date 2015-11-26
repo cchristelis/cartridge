@@ -8,11 +8,11 @@
 
 This repository holds the standard Sass, JavaScript and Testing suite to act as development base.
 
-The site uses [Gulp](https://www.google.com) as a task runner along with a few [3rd party tools](docs/3rd-party-plugins.md).
+The site uses [Gulp](http://gulpjs.com) as a task runner along with a few [3rd party tools](docs/3rd-party-plugins.md).
 
-This setup will enable you to run a local node server instance of a website. Through the use of handlebars templating you will be able to compile your website into pre-compiled static HTML files.
+This setup will enable you to run a local node server instance of a website. Through the use of [Handlebars](http://handlebarsjs.com) templating you will be able to compile your website into pre-compiled static HTML files.
 
-It also gives you the ability to package the site up with all the necessarry files.
+It also gives you the ability to package the site up with all the necessary files.
 
 ## Installation
 
@@ -37,7 +37,7 @@ adding `--prod` after any command will compress and minify the relevant files.
 
 ## Viewing your site
 
-An index has page has puprposely been ommited from this setup to encourage you to build from a styleguide.
+An index has page has purposely been omitted from this setup to encourage you to build from a styleguide.
 
 Ensure you have a local server instance running using `gulp serve`. This creates a local instance of the site and a browser sync instance which proxies off of this.
 

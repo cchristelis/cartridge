@@ -89,66 +89,21 @@ $old-ie-8: false !default;
     }
 }
 
-// Generate a font-size and baseline-compatible line-height.
-
-@mixin font-size($font-size, $line-height: auto) {
-    font-size: $font-size;
-    font-size: ($font-size / $base-font-size) * 1rem;
-
-    @if $line-height == auto {
-        line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
-    }
-
-    @else {
-
-        @if (type-of($line-height) == number or $line-height == inherit or $line-height == normal) {
-            line-height: $line-height;
-        }
-
-        @elseif ($line-height != none and $line-height != false) {
-            @warn "D’oh! ‘#{$line-height}’ is not a valid value for `line-height`."
-        }
-
-    }
-
-}
-
-// fonts
-@mixin font($name, $file, $weight: normal) {
-
-    @font-face {
-        font-family: $name;
-        src: url($fontUrl + $file + '.eot');
-        src: url($fontUrl + $file + '.eot?#iefix') format('embedded-opentype'),
-            url($fontUrl + $file + '.woff') format('woff'),
-            url($fontUrl + $file + '.ttf') format('truetype'),
-            url($fontUrl + $file + '#' + $name) format('svg');
-        font-weight: $weight;
-        font-style: normal;
-    }
-}
-
-
 // transition
-
 @mixin transition {
-    -webkit-transition:all 0.3s ease;
-    -moz-transition:all 0.3s ease;
-    -o-transition:all 0.3s ease;
-    -ms-transition:all 0.3s ease;
     transition:all 0.3s ease;
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    perspective: 1000;
+    transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    -webkit-transform-style: preserve-3d;
 }
 
 @mixin placeholder {
-    
+
     ::-webkit-input-placeholder {
         @content;
     }
   :-moz-placeholder           {@content;}
   ::-moz-placeholder          {@content;}
-  :-ms-input-placeholder      {@content;}  
+  :-ms-input-placeholder      {@content;}
 }

@@ -18,7 +18,6 @@
 	@include clearfix;
 }
 .col {
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	float: left;
 	min-height: remify(1px);

@@ -86,5 +86,5 @@ gulp.task('dev', function(cb) {
 });
 
 gulp.task('default', function (cb) {
-	runSeq(['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], ['sass:legacy:ie8'], cb);
+	runSeq(['clean'],['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], ['sass:legacy:ie8'], cb);
 });

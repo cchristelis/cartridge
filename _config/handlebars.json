@@ -3,8 +3,8 @@
 		"./views/_partials"
 	],
 	"views" : [
-        "./views/*.hbs"
-        ,"./views/**/*.hbs"
-        ,"!./views/_partials/**"
+        "./views/*.hbs",
+        "./views/**/*.hbs",
+        "!./views/_partials/**"
     ]
 }

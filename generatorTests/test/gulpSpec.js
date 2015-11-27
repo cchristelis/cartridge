@@ -122,31 +122,59 @@ describe('As a dev', function() {
         });
     });
 
-    describe('When running gulp component --name mc-testerson-iv', function() {
+    describe('When running `gulp component`', function() {
         var componentName = 'mc-testerson-iv';
         var componentPath = path.join(ROOT_DIR, 'views', '_partials', componentName);
 
-        before(function(done) {
-            runGulpTask(['component', '--name', 'mc-testerson-iv'], done)
-        });
+        describe('and a component name argument is not provided', function() {
 
-        it('should create the component folder', function() {
-            componentPath.should.be.a.path();
+            before(function(done) {
+                runGulpTask(['component'], done)
+            });
+
+            it('should not create the component folder', function() {
+                componentPath.should.not.be.a.path();
+            })
+
         })
 
-        it('should create the handlebars file', function() {
-            filePathToTest = path.join(componentPath, componentName + '.hbs');
-            filePathToTest.should.be.a.file().and.not.empty;
+        describe('and a component name is not provided using the --name argument', function() {
+
+            before(function(done) {
+                runGulpTask(['component', '--name'], done)
+            });
+
+            it('should not create the component folder', function() {
+                componentPath.should.not.be.a.path();
+            })
+
         })
 
-        it('should create the Sass file', function() {
-            filePathToTest = path.join(componentPath, componentName + '.scss');
-            filePathToTest.should.be.a.file().and.not.empty;
-        })
+        describe('and a component name is provided using the --name argument', function() {
 
-        after(function(done) {
-            fs.removeSync(componentPath);
-            done();
+            before(function(done) {
+                runGulpTask(['component', '--name', 'mc-testerson-iv'], done)
+            });
+
+            it('should create the component folder', function() {
+                componentPath.should.be.a.path();
+            })
+
+            it('should create the handlebars file', function() {
+                filePathToTest = path.join(componentPath, componentName + '.hbs');
+                filePathToTest.should.be.a.file().and.not.empty;
+            })
+
+            it('should create the Sass file', function() {
+                filePathToTest = path.join(componentPath, componentName + '.scss');
+                filePathToTest.should.be.a.file().and.not.empty;
+            })
+
+            after(function(done) {
+                fs.removeSync(componentPath);
+                done();
+            })
+
         })
     })
 

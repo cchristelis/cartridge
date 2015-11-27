@@ -1,15 +1,15 @@
 var fs = require('fs');
 var path = require('path');
+var chalk = require('chalk');
 
 var viewsPath = path.join(process.cwd(), 'views')
 var partialsPath = path.join(viewsPath, '_partials');
 
-var componentNewPath;
+var componentPath;
 var hbsFileName;
 var scssFileName;
 
 module.exports = function(gulp, argv) {
-
 
     gulp.task('new-component', function (cb) {
 
@@ -20,28 +20,25 @@ module.exports = function(gulp, argv) {
             console.log('Example usage:')
             console.log('gulp component --name header');
             console.log('');
-            cb();
         } else {
-
-            console.log('time to create a component name: %s', argv.name);
 
             hbsFileName = argv.name + '.hbs';
             scssFileName = argv.name + '.scss';
-            componentNewPath = path.join(partialsPath, argv.name);
+            componentPath = path.join(partialsPath, argv.name);
 
-            fs.mkdirSync(componentNewPath);
+            fs.mkdirSync(componentPath);
+            console.log(chalk.green('Folder "%s" created'), argv.name);
 
-            console.log('create %s', hbsFileName);
-            console.log('create %s', scssFileName);
+            fs.writeFileSync(path.join(componentPath, hbsFileName), '<h1>' + argv.name +'</h1>', 'utf8');
+            console.log(chalk.green('Handlebars file "%s" created'), hbsFileName);
 
+            fs.writeFileSync(path.join(componentPath, scssFileName), '//' + argv.name + ' styles', 'utf8');
+            console.log(chalk.green('Sass file "%s" created'), scssFileName);
+            console.log(chalk.green('Component files created in "%s"'), componentPath);
 
-            //@TODO 
-            //create folder
-            //create handlebars file
-            //create sass partial
-
-            cb();
         }
+
+        cb();
 
     });
 

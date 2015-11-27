@@ -28,6 +28,7 @@ require('./gulpTasks/copy-assets.js')(gulp, config);
 require('./gulpTasks/release.js')(gulp, creds);
 require('./gulpTasks/compile-html.js')(gulp);
 require('./gulpTasks/local-testing.js')(gulp, config);
+require('./gulpTasks/new-component.js')(gulp, argv);
 
 /* ============================================================ *\
 	MAIN TASKS
@@ -59,6 +60,10 @@ gulp.task('watch:sprites', function () {
 		);
 	}
 });
+
+gulp.task('component', function(cb) {
+	runSeq(['new-component'], cb);
+})
 
 gulp.task('watch', function (cb) {
 	runSeq(['watch:sass', 'watch:js', 'watch:sprites'], cb);

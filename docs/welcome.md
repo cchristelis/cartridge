@@ -19,7 +19,17 @@ Assuming you have cloned the repo and done your first gulp, here are a few thing
 
 Handlebars allows seperate components/partials to be created. This approach allows the structure and the styles to be seperate and then included in the view files where needed.
 
-To add a create partial:
+To create a new partial
+
+####The short way
+
+run `gulp component --name <component_name>` 
+
+e.g. `gulp component --name newComponent`
+
+This will create the component folder, handlebars file and Sass file inside of `views/_partials`. Running `gulp` will including the Sass file - ready for styling.
+
+####The long way:
 
 1. Inside of `views/_partials` folder, create a new folder with the name of the new partial e.g `newComponent`.
 2. Inside of this new folder, `views/_partials/newComponent`, create two files.
@@ -27,7 +37,8 @@ To add a create partial:
     * `newComponent.scss` - the Sass file.
     * Both of the above files follow the convention of being named the same as the folder. This makes it easier to find the partial files inside of a code editor.
 3. At the top of the newly created Sass file, add a comment giving a small description of what the file is for. This is to ensure this Sass file is included in the build. An example of this would be `//styles for newComponent`. Running `gulp` will include the Sass file - ready for styling.
-4. To include the component in a view, include it by using the following code `{{> newComponent/newComponent }}`.
+
+To include the component in a view, include it by using the following code `{{> newComponent/newComponent }}`.
 
 Partials can be made a modular as required - allowing you to have a `button` and `input` partial, which are included in a `search` partial which itself is used in the `header` partial.
 

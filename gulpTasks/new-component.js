@@ -27,15 +27,17 @@ module.exports = function(gulp, argv) {
             componentPath = path.join(partialsPath, argv.name);
 
             fs.mkdirSync(componentPath);
-            console.log(chalk.green('Folder "%s" created'), argv.name);
+            console.log('');
+            console.log(chalk.green('✓ Folder "%s" created'), argv.name);
 
             fs.writeFileSync(path.join(componentPath, hbsFileName), '<h1>' + argv.name +'</h1>', 'utf8');
-            console.log(chalk.green('Handlebars file "%s" created'), hbsFileName);
+            console.log(chalk.green('✓ Handlebars file "%s" created'), hbsFileName);
 
             fs.writeFileSync(path.join(componentPath, scssFileName), '//' + argv.name + ' styles', 'utf8');
-            console.log(chalk.green('Sass file "%s" created'), scssFileName);
-            console.log(chalk.green('Component files created in "%s"'), componentPath);
-
+            console.log(chalk.green('✓ Sass file "%s" created'), scssFileName);
+            console.log('')
+            console.log(chalk.bold('Component files created in "%s"'), componentPath);
+            console.log('')
         }
 
         cb();

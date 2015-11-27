@@ -51,8 +51,17 @@ gulp.task('watch:js', function () {
 	}
 });
 
+gulp.task('watch:sprites', function () {
+	if(!argv.prod) {
+		gulp.watch(
+			[config.paths.src.images + '/svgs/*.svg'],
+			['sprites']
+		);
+	}
+});
+
 gulp.task('watch', function (cb) {
-	runSeq(['watch:sass', 'watch:js'], cb);
+	runSeq(['watch:sass', 'watch:js', 'watch:sprites'], cb);
 });
 
 gulp.task('build', function (cb) {

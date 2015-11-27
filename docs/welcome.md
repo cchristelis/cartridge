@@ -27,7 +27,7 @@ run `gulp component --name <component_name>`
 
 e.g. `gulp component --name newComponent`
 
-This will create the component folder, handlebars file and Sass file inside of `views/_partials`. Easy!
+This will create the component folder, handlebars file and Sass file inside of `views/_partials`. Running `gulp` will including the Sass file - ready for styling.
 
 ####The long way:
 

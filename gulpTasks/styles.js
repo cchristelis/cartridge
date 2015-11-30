@@ -47,8 +47,7 @@ module.exports = function(gulp, config, argv) {
             pixrem({
                 rootValue: config.pixelBase
             }),
-            mqPacker(),
-            cssNano()
+            mqPacker()
         ];
 
         if(argv.prod) {

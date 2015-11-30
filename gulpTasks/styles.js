@@ -16,7 +16,6 @@ var sass            = require('gulp-sass');
 var autoprefixer    = require('autoprefixer');
 var postcss         = require('gulp-postcss');
 var pixrem          = require('pixrem');
-var uncss           = require('gulp-uncss');
 var cssNano         = require('cssnano');
 var mqPacker        = require('css-mqpacker');
 

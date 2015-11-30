@@ -1,10 +1,26 @@
-_client
-node_modules
+# OS
+.DS_Store
+
+# Logging
+*.log
+tmp
 logs
 *.log
 logfile.txt
-build
-release
+
+# Dependencies
+bower_components
+node_modules
+
+# Project meta
+.sass-cache
+*.sublime-workspace
+*.sublime-project
+
+# Generated files
 *.css
 main.scss
 _tools.sprites.scss
+build
+release
+_client

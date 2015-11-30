@@ -1,6 +1,7 @@
 _client
 node_modules
 logs
+*.log
 logfile.txt
 build
 release

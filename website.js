@@ -28,10 +28,8 @@ website.use(bodyParser.urlencoded({ extended: false }));
 website.use(methodOverride());
 website.use(express.static(path.join(__dirname, 'public')));
 
-
-
 // Setup routing
-require('./routing')(website);
+require('./routes/main')(website);
 
 http.listen(website.get('port'), function(){
 	console.log('Website ready, listening on port: ' + website.get('port'));

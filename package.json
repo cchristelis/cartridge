@@ -40,7 +40,6 @@
     "gulp-zip": "^3.0.2",
     "imagemin-pngquant": "^4.1.0",
     "pixrem": "^3.0.0",
-    "postcss-minify-selectors": "^2.0.1",
     "run-sequence": "^1.1.0",
     "url": "^0.10.3",
     "yargs": "^3.18.0"

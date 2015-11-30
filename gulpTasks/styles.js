@@ -19,7 +19,6 @@ var pixrem          = require('pixrem');
 var uncss           = require('gulp-uncss');
 var cssNano         = require('cssnano');
 var mqPacker        = require('css-mqpacker');
-var minifySelectors = require('postcss-minify-selectors');
 
 // Config
 var creds           = require('../_config/creds.json');
@@ -49,7 +48,6 @@ module.exports = function(gulp, config, argv) {
                 rootValue: config.pixelBase
             }),
             mqPacker(),
-            minifySelectors(),
             cssNano()
         ];
 

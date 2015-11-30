@@ -7,6 +7,7 @@
     "url": "git+https://github.com/code-computerlove/node-static-site-generator"
   },
   "scripts": {
+  	"start": "gulp watch && gulp serve",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "license": "ISC",

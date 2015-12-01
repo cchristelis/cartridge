@@ -35,7 +35,6 @@ describe('As a dev', function() {
         it('then required express files should exist', function() {
             var filePathToTest;
             var files = [
-                'routing.js',
                 'website.js'
             ];
 

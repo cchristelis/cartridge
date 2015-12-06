@@ -2,9 +2,9 @@
 [![devDependency Status](https://david-dm.org/code-computerlove/node-static-site-generator/dev-status.svg)](https://david-dm.org/code-computerlove/node-static-site-generator#info=devDependencies)
 [![Dependency Status](https://david-dm.org/code-computerlove/node-static-site-generator.svg)](https://david-dm.org/code-computerlove/node-static-site-generator)
 
-# Basic static website generator [![Build Status](https://travis-ci.org/code-computerlove/node-static-site-generator.svg?branch=master)](https://travis-ci.org/code-computerlove/node-static-site-generator)
+# Slate [![Build Status](https://travis-ci.org/code-computerlove/node-static-site-generator.svg?branch=master)](https://travis-ci.org/code-computerlove/node-static-site-generator)
 
-> Get yourself going with a ready made basic static website setup
+> Start with a clean slate and get yourself going with a ready made basic static website setup
 
 This repository holds the standard Sass, JavaScript and Testing suite to act as development base.
 

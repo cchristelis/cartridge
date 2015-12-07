@@ -2,7 +2,7 @@
 [![devDependency Status](https://david-dm.org/code-computerlove/slate/dev-status.svg)](https://david-dm.org/code-computerlove/slate#info=devDependencies)
 [![Dependency Status](https://david-dm.org/code-computerlove/slate.svg)](https://david-dm.org/code-computerlove/slate)
 
-# Slate [![Build Status](https://travis-ci.org/code-computerlove/slate.svg?branch=master)](https://travis-ci.org/code-computerlove/node-static-site-generator)
+# Slate [![Build Status](https://travis-ci.org/code-computerlove/slate.svg?branch=master)](https://travis-ci.org/code-computerlove/slate)
 
 > Start with a clean slate and get yourself going with a ready made basic static website setup
 
@@ -16,7 +16,7 @@ It also gives you the ability to package the site up with all the necessary file
 
 ## Installation
 
-* Clone the repo - `https://github.com/code-computerlove/node-static-site-generator.git`
+* Clone the repo - `https://github.com/code-computerlove/slate.git`
 * Open a new command prompt (or Terminal on mac).
 * Navigate to the folder
 * Run the following commands

@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/code-computerlove/slate.png?label=ready&title=Ready)](https://waffle.io/code-computerlove/node-static-site-generator)
+[![Stories in Ready](https://badge.waffle.io/code-computerlove/slate.svg?label=ready&title=Ready)](http://waffle.io/code-computerlove/slate)
 [![devDependency Status](https://david-dm.org/code-computerlove/node-static-site-generator/dev-status.svg)](https://david-dm.org/code-computerlove/node-static-site-generator#info=devDependencies)
 [![Dependency Status](https://david-dm.org/code-computerlove/node-static-site-generator.svg)](https://david-dm.org/code-computerlove/node-static-site-generator)
 

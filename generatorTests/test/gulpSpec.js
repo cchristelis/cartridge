@@ -30,7 +30,7 @@ function cleanBuildAndReleaseFolders() {
 
 describe('As a dev', function() {
 
-    this.timeout(20000);
+    this.timeout(100000);
 
     before(function(done) {
         cleanBuildAndReleaseFolders();

@@ -7,8 +7,7 @@
     "url": "git+https://github.com/code-computerlove/node-static-site-generator"
   },
   "scripts": {
-  	"start": "gulp watch && gulp serve",
-    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+    "start": "gulp watch && gulp serve"
   },
   "license": "ISC",
   "dependencies": {
@@ -59,6 +58,7 @@
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.0.2",
     "karma-phantomjs-launcher": "^0.2.0",
+    "karma-teamcity-reporter": "^0.2.1",
     "mocha": "^2.3.3",
     "phantomjs": "^1.9.17"
   }

@@ -10,6 +10,13 @@
         "fonts": 	"fonts",
         "reports": 		"reports"
     },
+    "tests" : {
+        "configFile" : "karma.conf.js",
+        "reporters" : {
+            "production": ["teamcity"],
+            "dev": ["mocha"]
+        }
+    },
     "pixelBase": "16px",
     "pixelBaseNoUnit": 16
 }

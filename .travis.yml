@@ -12,3 +12,7 @@ install:
     - npm install -g gulp
 script: 
     - mocha
+cache:
+  directories:
+    - node_modules
+    - generatorTests/node_modules

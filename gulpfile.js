@@ -28,6 +28,7 @@ require('./gulpTasks/copy-assets.js')(gulp, config);
 require('./gulpTasks/release.js')(gulp, creds);
 require('./gulpTasks/compile-html.js')(gulp);
 require('./gulpTasks/local-testing.js')(gulp, config);
+require('./gulpTasks/unit-testing.js')(gulp, config, argv);
 require('./gulpTasks/new-component.js')(gulp, argv);
 
 /* ============================================================ *\
@@ -47,7 +48,7 @@ gulp.task('watch:js', function () {
 	if(!argv.prod) {
 		gulp.watch(
 			[config.paths.src.scripts + '/**/*.js', config.paths.src.components + '/**/*.js'],
-			['scripts']
+			['tests', 'scripts']
 		);
 	}
 });
@@ -86,5 +87,5 @@ gulp.task('dev', function(cb) {
 });
 
 gulp.task('default', function (cb) {
-	runSeq(['clean'],['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], ['sass:legacy:ie8'], cb);
+	runSeq(['clean'],['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], ['sass:legacy:ie8'], ['tests'], cb);
 });

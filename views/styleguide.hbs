@@ -18,6 +18,20 @@
 
 		<div class="wrapper">
 			<div class="styleguide__section">
+				<h2 class="styleguide__section-title">Colour Pallet</h2>
+				<div class="color-list">
+						{{#each colors }}
+						<div class="color-item">
+							<span class="color-item__color color-item__color--white" style="background-color: {{this}}"></span>
+							<span class="color-item__title">{{this}}</span>
+						</div>
+						{{/each}}
+					</div>
+			</div>
+		</div>
+
+		<div class="wrapper">
+			<div class="styleguide__section">
 				<h2 class="styleguide__section-title">12 column grid all widths</h2>
 				<section class="section grid styleguide__grid">
 					<div class="grid__row">

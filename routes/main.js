@@ -1,6 +1,8 @@
 var path = require('path');
 var templateData = require(path.resolve(__dirname, '..', '_config', 'templateData.json'));
 var templateHelpers = require(path.resolve(__dirname, '..', '_config', 'templateHelpers.js'))();
+var coloursSass = __dirname + '/../_source/styles/_settings/_settings.colors.scss';
+var fs = require('fs');
 
 var WebsiteController = function (website) {
 	// Public functions
@@ -9,6 +11,11 @@ var WebsiteController = function (website) {
 		if (!request.body) return response.sendStatus(400);
 		var url = parseUrl(request.params[0]);
 		
+		if(url === 'styleguide'){
+			response.render(url, createStyleGuide());
+			return;
+		}
+
 		response.render(url, createModel());
 	};
 
@@ -28,6 +35,43 @@ var WebsiteController = function (website) {
 			url = 'index'
 		}
 		return url;
+	}
+
+	function getFileContents(file){
+
+		var colorItem;
+    var regHex = /#\w+;/g;
+    var colArr = [];
+
+		var file = fs.readFile(file, 'utf8', function (err,data) {
+
+      while (colorItem = regHex.exec(data)){
+				var color = colorItem[0].replace(';','');
+				if(colArr.indexOf(color) === -1){ 
+	    		colArr.push(color);
+	    	}
+	  	}
+
+	  	return data;
+
+    });
+
+		return colArr;
+	}
+
+	function createStyleGuide(response, url){
+
+		var colorItem;
+    var regHex = /#\w+;/g;
+    var colArr = getFileContents(coloursSass);
+
+		var model = {
+			layout: false,
+			data: templateData,
+			helpers: templateHelpers,
+			colors: colArr
+		}
+		return model;
 	}
 
 };

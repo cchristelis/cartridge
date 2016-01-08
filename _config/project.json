@@ -11,7 +11,11 @@
         "reports": 		"reports"
     },
     "tests" : {
-        "configFile" : "karma.conf.js"
+        "configFile" : "karma.conf.js",
+        "reporters" : {
+            "production": ["teamcity"],
+            "dev": ["mocha"]
+        }
     },
     "pixelBase": "16px",
     "pixelBaseNoUnit": 16

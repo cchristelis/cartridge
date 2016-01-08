@@ -10,6 +10,9 @@
         "fonts": 	"fonts",
         "reports": 		"reports"
     },
+    "tests" : {
+        "configFile" : "karma.conf.js"
+    },
     "pixelBase": "16px",
     "pixelBaseNoUnit": 16
 }

@@ -12,8 +12,6 @@ If you have a suggestion or a bug fix, please [create an issue](https://github.c
 Fork the project then create a new branch to work on using [git flow](http://nvie.com/posts/a-successful-git-branching-model).
 
 ### Git flow
-For a quick guide to using git flow, see [my blog post](http://furzeface.com/blog/git-flow-aint-scary) on the subject.
-
 Use this for feature branching, with a short feature description or the [GitHub issue number](https://github.com/code-computerlove/slate/issues) as a branch name eg:
 ```sh
 git flow feature start 39

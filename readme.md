@@ -59,4 +59,5 @@ Template data is stored in the `templateData.json` file located in `_config` fol
 
 ## Contributing
 
+* [Workflow](docs/contributing/workflow.md)
 * [Testing](docs/contributing/testing.md)

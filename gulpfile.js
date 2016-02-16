@@ -49,6 +49,10 @@ gulp.task('clean', function () {
 
 gulp.task('watch', slateSettings.tasks.watch);
 
-gulp.task('default', function (cb) {
+// Task for team city
+gulp.task('build', function (cb) {
 	return runSeq(['clean'], slateSettings.tasks.default, cb);
 });
+
+// Task for local dev
+gulp.task('default', slateSettings.tasks.default.concat(['watch']));

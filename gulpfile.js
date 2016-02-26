@@ -26,8 +26,7 @@ var slateSettings = {
 	cleanPaths: []
 };
 
-config.isprod  = argv.prod ? true : false;
-config.paths   = require('./_config/paths')(config);
+config.isprod = argv.prod ? true : false;
 
 /* ============================================================ *\
 	TASK MODULES
@@ -36,7 +35,7 @@ config.paths   = require('./_config/paths')(config);
 var gulpTasksDir = path.join(__dirname, 'gulpTasks');
 
 slate.modules.forEach(function(module) {
-	require('node_modules/' + module.taskFile)(gulp, config, slateSettings, argv, creds);
+	require('node_modules/' + module.task)(config, slateSettings, creds);
 });
 
 gulp.task('clean', function () {
@@ -49,10 +48,10 @@ gulp.task('clean', function () {
 
 gulp.task('watch', slateSettings.tasks.watch);
 
+// Task for local dev
+gulp.task('default', slateSettings.tasks.default.concat(['watch']));
+
 // Task for team city
 gulp.task('build', function (cb) {
 	return runSeq(['clean'], slateSettings.tasks.default, cb);
 });
-
-// Task for local dev
-gulp.task('default', slateSettings.tasks.default.concat(['watch']));

@@ -1,6 +1,6 @@
 {
-	"name": "website-basic",
-	"version": "0.1.0",
+	"name": "slate",
+	"version": "0.1.1",
 	"description": "A basic website setup with gulp",
 	"license": "ISC",
 	"repository": {

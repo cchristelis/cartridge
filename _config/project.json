@@ -1,14 +1,8 @@
 {
-	"dest":  "public/_client",
-	"src":   "_source",
-	"build": "build/_client",
-	"dirs":  {
-		"styles":     "styles",
-		"scripts":    "scripts",
-		"images":     "images",
-		"components": "views",
-		"fonts":      "fonts",
-		"reports":    "reports"
+	"dirs": {
+		"dest":  "public/_client",
+		"src":   "_source",
+		"build": "build/_client"
 	},
 	"tests" : {
 		"configFile": "karma.conf.js",

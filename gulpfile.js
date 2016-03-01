@@ -18,7 +18,7 @@ var config = require('./_config/project.json');
 var creds  = require('./_config/creds.json');
 var slate  = require('./.slaterc');
 
-var slateSettings = {
+var cartridgeSettings = {
 	tasks: {
 		default: [],
 		watch:   [],
@@ -35,23 +35,23 @@ config.isprod = argv.prod ? true : false;
 var gulpTasksDir = path.join(__dirname, 'gulpTasks');
 
 slate.modules.forEach(function(module) {
-	require('node_modules/' + module.task)(config, slateSettings, creds);
+	require('node_modules/' + module.task)(config, cartridgeSettings, creds);
 });
 
 gulp.task('clean', function () {
-	return del(slateSettings.cleanPaths);
+	return del(cartridgeSettings.cleanPaths);
 });
 
 /* ============================================================ *\
 	MAIN TASKS
 \* ============================================================ */
 
-gulp.task('watch', slateSettings.tasks.watch);
+gulp.task('watch', cartridgeSettings.tasks.watch);
 
 // Task for local dev
-gulp.task('default', slateSettings.tasks.default.concat(['watch']));
+gulp.task('default', cartridgeSettings.tasks.default.concat(['watch']));
 
 // Task for team city
 gulp.task('build', function (cb) {
-	return runSeq(['clean'], slateSettings.tasks.default, cb);
+	return runSeq(['clean'], cartridgeSettings.tasks.default, cb);
 });

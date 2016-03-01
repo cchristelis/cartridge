@@ -1,5 +1,5 @@
 {
-	"cartridgeVersion": "",
-	"dateGenerated": "",
+	"cartridgeVersion": "<%= currentVersion %>",
+	"dateGenerated": "<%= projectGeneratedDate %>",
 	"modules": []
 }

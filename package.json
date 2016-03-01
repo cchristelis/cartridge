@@ -1,11 +1,11 @@
 {
-	"name": "slate",
+	"name": "cartridge",
 	"version": "0.1.1",
 	"description": "A basic website setup with gulp",
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/code-computerlove/node-static-site-generator"
+		"url": "git+https://github.com/code-computerlove/cartridge"
 	},
 	"scripts": {
 		"start": "gulp watch && gulp serve"

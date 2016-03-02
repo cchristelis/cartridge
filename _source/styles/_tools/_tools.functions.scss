@@ -53,24 +53,16 @@
 }
 
 /*
-* Map Deep Get
-*/
-
-@function map-deep-get($map, $keys...) {
-		@each $key in $keys {
-				$map: map-get($map, $key);
-		}
-		@return $map;
-}
-
-/*
 * Get Color Funciton
 * This will look for an atom in the color palete and then search for the color variation
 */
 
 @function getColor($atom, $color) {
-	@if(map-deep-get($Colors, $atom, $color)) {
-		@return map-deep-get($Colors, $atom, $color);
+
+	$mapGet: map-get($Colors, $atom);
+
+	@if(map-has-key($mapGet, $color)) {
+		@return map-get($mapGet, $color);
 	} @else {
 		@warn 'Colour: #{$color} is not a valid colour';
 		@return red;

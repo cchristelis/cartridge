@@ -3,4 +3,5 @@
 .travis.yml export-ignore
 .gitattributes export-ignore
 readme.md export-ignore
+package.json export-ignore
 LICENSE-MIT export-ignore

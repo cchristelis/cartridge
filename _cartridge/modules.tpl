@@ -1,5 +1,5 @@
 Module | Version | Repo
 ------ | ------- | -----
-<% _.each(modules, function(module){ %>
-<%= module.name %> | {{module.version}} | [{{module.site}}]
+<% modules.forEach(function(module){ %>
+<%= module.name %> | <%= module.version %> | (<%= module.site %>)[<%= module.site %>]
 <% }); %>

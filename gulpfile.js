@@ -15,11 +15,12 @@ var del = require('del');
 
 // Node
 var path = require('path');
+var fs   = require('fs');
 
 // Config
 var config    = require('./_config/project.json');
 var creds     = require('./_config/creds.json');
-var cartridge = require('./.cartridgerc');
+var cartridge = JSON.parse(fs.readFileSync('./.cartridgerc', 'utf8'));
 
 // Prep the cartridge settings object
 var cartridgeSettings           = {};

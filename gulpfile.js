@@ -35,8 +35,6 @@ config.isprod = argv.prod ? true : false;
 	TASK MODULES
 \* ============================================================ */
 
-var gulpTasksDir = path.join(__dirname, 'gulpTasks');
-
 cartridge.modules.forEach(function(module) {
 	require(path.resolve('node_modules/' + module.task))(config, cartridgeSettings, creds);
 });

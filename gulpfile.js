@@ -16,7 +16,7 @@ var del = require('del');
 // Config
 var config = require('./_config/project.json');
 var creds  = require('./_config/creds.json');
-var slate  = require('./.slaterc');
+var slate  = require('./.cartridgerc');
 
 var cartridgeSettings = {
 	tasks: {

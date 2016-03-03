@@ -13,18 +13,20 @@ var runSeq = require('run-sequence');
 // Tasks
 var del = require('del');
 
-// Config
-var config = require('./_config/project.json');
-var creds  = require('./_config/creds.json');
-var slate  = require('./.cartridgerc');
+// Node
+var path = require('path');
 
-var cartridgeSettings = {
-	tasks: {
-		default: [],
-		watch:   [],
-	}
-	cleanPaths: []
-};
+// Config
+var config    = require('./_config/project.json');
+var creds     = require('./_config/creds.json');
+var cartridge = require('./.cartridgerc');
+
+// Prep the cartridge settings object
+var cartridgeSettings           = {};
+cartridgeSettings.tasks         = {};
+cartridgeSettings.tasks.default = [];
+cartridgeSettings.tasks.watch   = [];
+cartridgeSettings.cleanPaths    = [];
 
 config.isprod = argv.prod ? true : false;
 
@@ -34,8 +36,8 @@ config.isprod = argv.prod ? true : false;
 
 var gulpTasksDir = path.join(__dirname, 'gulpTasks');
 
-slate.modules.forEach(function(module) {
-	require('node_modules/' + module.task)(config, cartridgeSettings, creds);
+cartridge.modules.forEach(function(module) {
+	require(path.resolve('node_modules/' + module.task))(config, cartridgeSettings, creds);
 });
 
 gulp.task('clean', function () {

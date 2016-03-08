@@ -1,8 +1,8 @@
-[![Stories in Ready](https://badge.waffle.io/code-computerlove/slate.svg?label=ready&title=Ready)](http://waffle.io/code-computerlove/slate)
-[![devDependency Status](https://david-dm.org/code-computerlove/slate/dev-status.svg)](https://david-dm.org/code-computerlove/slate#info=devDependencies)
-[![Dependency Status](https://david-dm.org/code-computerlove/slate.svg)](https://david-dm.org/code-computerlove/slate)
+[![Stories in Ready](https://badge.waffle.io/cartridge/cartridge.svg?label=ready&title=Ready)](http://waffle.io/code-computerlove/cartridge)
+[![devDependency Status](https://david-dm.org/cartridge/cartridge/dev-status.svg)](https://david-dm.org/code-computerlove/cartridge#info=devDependencies)
+[![Dependency Status](https://david-dm.org/cartridge/cartridge.svg)](https://david-dm.org/code-computerlove/cartridge)
 
-# Slate [![Build Status](https://travis-ci.org/code-computerlove/slate.svg?branch=master)](https://travis-ci.org/code-computerlove/slate)
+# Cartridge [![Build Status](https://travis-ci.org/cartridge/cartridge.svg?branch=master)](https://travis-ci.org/cartridge/cartridge)
 
 > Start with a clean slate and get yourself going with a ready made basic static website setup
 

@@ -15,15 +15,8 @@ describe('As a dev', function() {
             var filePathToTest;
 
             var files = [
-                'creds.json',
-                'handlebars.json',
-                'itcss.js',
-                'jshint.json',
-                'paths.js',
                 'project.json',
-                'sass.json',
-                'templateData.json',
-                'templateHelpers.js',
+                'paths.js'
             ];
 
             files.forEach(function(fileName) {
@@ -32,23 +25,12 @@ describe('As a dev', function() {
             });
         })
 
-        it('then required express files should exist', function() {
-            var filePathToTest;
-            var files = [
-                'website.js'
-            ];
-
-            files.forEach(function(fileName) {
-                filePathToTest = path.join(ROOT_DIR, fileName);
-                filePathToTest.should.be.a.file().and.not.empty;
-            });
-        })
-
-        it('then required build files should exist', function() {
+        it('then required base files should exist', function() {
             var filePathToTest;
             var files = [
                 'gulpfile.js',
-                'package.json'
+                'package.json',
+                'readme.md',
             ];
 
             files.forEach(function(fileName) {
@@ -60,7 +42,8 @@ describe('As a dev', function() {
         it('then required handlebars view files should exist', function() {
             var pathToTest = path.join(ROOT_DIR, 'views/');
             var files = [
-                'styleguide.hbs'
+                'index.hbs',
+                'styleguide.hbs',
             ]
 
             files.forEach(function(fileName) {

@@ -8,7 +8,7 @@ const ROOT_DIR = path.join(process.cwd(), '..');
 
 describe('As a dev', function() {
 
-    describe('when testing generator file structure', function() {
+    describe('when testing cartridge file structure', function() {
 
         it('then _config files should exist', function() {
             var pathToTest = path.join(ROOT_DIR, '_config/');

@@ -8,7 +8,7 @@ const ROOT_DIR = path.join(process.cwd(), '..');
 
 describe('As a dev', function() {
 
-    describe('When testing generator directory structure', function() {
+    describe('When testing cartridge directory structure', function() {
 
         var pathToTest;
 

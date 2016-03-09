@@ -16,13 +16,7 @@ It also gives you the ability to package the site up with all the necessary file
 
 ## Installation
 
-* Clone the repo - `https://github.com/code-computerlove/cartridge.git`
-* Open a new command prompt (or Terminal on mac).
-* Navigate to the folder
-* Run the following commands
-    * `npm install` (sudo may be required for mac)
-    * `gulp`
-    * `gulp serve` - this will open a local instance of the site for you ([See 'Viewing your site'](#viewing-your-site))
+Installation is managed by the command line tool [cartridge-cli](https://github.com/cartridge/cartridge-cli).
 
 Optional setup details can be found in [Welcome](docs/welcome.md)
 

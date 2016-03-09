@@ -12,6 +12,11 @@ describe('As a dev', function() {
 
         var pathToTest;
 
+        it('then _cartridge folder should exist', function() {
+            pathToTest = path.join(ROOT_DIR, '_config');
+            pathToTest.should.be.a.directory();
+        })
+
         it('then _config folder should exist', function() {
             pathToTest = path.join(ROOT_DIR, '_config');
             pathToTest.should.be.a.directory();
@@ -19,16 +24,6 @@ describe('As a dev', function() {
 
         it('then _source folder should exist', function() {
             pathToTest = path.join(ROOT_DIR, '_source');
-            pathToTest.should.be.a.directory();
-        })
-
-        it('then gulpTasks folder should exist', function() {
-            pathToTest = path.join(ROOT_DIR, 'gulpTasks');
-            pathToTest.should.be.a.directory();
-        })
-
-        it('then routes folder should exist', function() {
-            pathToTest = path.join(ROOT_DIR, 'routes');
             pathToTest.should.be.a.directory();
         })
 

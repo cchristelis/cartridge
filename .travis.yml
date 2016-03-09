@@ -5,13 +5,13 @@ node_js:
     - "0.12"
 before_install:
     - npm install
-    # - cd generatorTests
+    - cd generatorTests
 install:
-    # - npm install
-    # - npm install -g mocha
-    # - npm install -g gulp
+    - npm install
+    - npm install -g mocha
+    - npm install -g gulp
 script:
-    # - mocha
+    - mocha
 cache:
   directories:
     - node_modules

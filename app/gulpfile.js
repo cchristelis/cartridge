@@ -17,42 +17,44 @@ var del = require('del');
 var path = require('path');
 var fs   = require('fs');
 
+// Tasks
+var tasks         = {};
+
+tasks.default     = [];
+tasks.watch       = [];
+
 // Config
-var config    = require('./_config/project.json');
-var creds     = require('./_config/creds.json');
-var cartridge = JSON.parse(fs.readFileSync('./.cartridgerc', 'utf8'));
+var config        = require('./_config/project.json');
+var cartridge     = JSON.parse(fs.readFileSync('./.cartridgerc', 'utf8'));
 
-// Prep the cartridge settings object
-var cartridgeSettings           = {};
-cartridgeSettings.tasks         = {};
-cartridgeSettings.tasks.default = [];
-cartridgeSettings.tasks.watch   = [];
-cartridgeSettings.cleanPaths    = [];
+config.cleanPaths = [];
+config.creds      = require('./_config/creds.json');
 
-config.isprod = argv.prod ? true : false;
+config.isProd     = argv.prod || false;
+config.isWatched  = argv.watch || false;
 
 /* ============================================================ *\
 	TASK MODULES
 \* ============================================================ */
 
 cartridge.modules.forEach(function(module) {
-	require(path.resolve('node_modules/' + module.task))(config, cartridgeSettings, creds);
+	require(path.resolve('node_modules/' + module.task))(gulp, config, tasks);
 });
 
 gulp.task('clean', function () {
-	return del(cartridgeSettings.cleanPaths);
+	return del(config.cleanPaths);
 });
 
 /* ============================================================ *\
 	MAIN TASKS
 \* ============================================================ */
 
-gulp.task('watch', cartridgeSettings.tasks.watch);
+gulp.task('watch', tasks.watch);
 
 // Task for local dev
-gulp.task('default', cartridgeSettings.tasks.default.concat(['watch']));
+gulp.task('default', tasks.default.concat(['watch']));
 
 // Task for team city
 gulp.task('build', function (cb) {
-	return runSeq(['clean'], cartridgeSettings.tasks.default, cb);
+	return runSeq(['clean'], tasks.default, cb);
 });

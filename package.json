@@ -3,12 +3,19 @@
 	"version": "0.3.2",
 	"description": "A basic website setup with gulp",
 	"license": "ISC",
+	"main": "index.js",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/cartridge/cartridge"
 	},
-	"main" : "index.js",
 	"scripts": {},
-	"dependencies": {},
+	"dependencies": {
+		"chalk": "^1.1.1",
+		"del": "^2.2.0",
+		"fs-extra": "^0.26.5",
+		"lodash": "^4.6.1",
+		"ncp": "^2.0.0",
+		"path": "^0.12.7"
+	},
 	"devDependencies": {}
 }

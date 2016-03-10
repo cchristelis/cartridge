@@ -1,8 +1,9 @@
 {
 	"dirs": {
-		"dest":  "public/_client",
-		"src":   "_source",
-		"build": "build/_client"
+		"build":  "build/_client",
+		"config": "_config",
+		"dest":   "public/_client",
+		"src":    "_source"
 	},
 	"tests" : {
 		"configFile": "karma.conf.js",

@@ -1,13 +1,19 @@
 # <%= projectNameFileName %>
 <%= projectDescription %>
 
-## Prerequisits
+## Prerequisites
 * Git installed on command line
 * Node & NPM installed
 
 ## Install
 * Checkout the project from Bitbucket.
 * Run npm install to setup Cartridge & Gulp.
+
+## Getting started
+To get started type `gulp` in the command line at the project root. The default task runs in development mode, without watch tasks. The following flasg can be used:
+
+* `--prod` - Run production tasks
+* `--watch` - Watch for file changes
 ___
 
 ## Coding Standards

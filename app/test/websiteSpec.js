@@ -1,7 +1,7 @@
 describe('As a test test', function() {
 	var chai 	= require('chai');
 
-    // Enables chai be syntax
+    // Enables chai expect syntax
     //
     // rather than assert.equals(valueOne, valueTwo)
     //

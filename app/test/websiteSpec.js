@@ -1,4 +1,12 @@
 describe('As a test test', function() {
+	var chai 	= require('chai');
+
+    // Enables chai be syntax
+    //
+    // rather than assert.equals(valueOne, valueTwo)
+    //
+    // expect(true).to.be.true;
+    chai.expect();
 
     // Enables chai should syntax
     //

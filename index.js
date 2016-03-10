@@ -11,10 +11,10 @@ var chalk     = require('chalk');
 var template = require('lodash/template');
 
 var paths = {
-	project:   path.resolve('../../'),
-	config:    path.resolve('../../', '_config'),
-	readme:    path.resolve('../../', 'readme.md'),
-	cartridge: path.resolve('../../_cartridge')
+	project:   path.resolve('..', '..'),
+	config:    path.resolve('..', '..', '_config'),
+	readme:    path.resolve('..', '..', 'readme.md'),
+	cartridge: path.resolve('..', '..', '_cartridge')
 };
 
 
@@ -112,5 +112,9 @@ cartridgeApi.addModuleConfig = function addModuleConfig(configPath, callback) {
 cartridgeApi.removeModuleConfig = function removeModuleConfig() {
 	// TODO: implement
 };
+
+cartridgeApi.copySource = function copySource(callback) {
+	fs.copyRecursive('./app', paths.project, callback);
+}
 
 module.exports = cartridgeApi;

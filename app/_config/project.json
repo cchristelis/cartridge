@@ -10,8 +10,5 @@
 			"production": ["teamcity"],
 			"dev":        ["mocha"]
 		}
-	},
-	"pixelBase":       "16px",
-	"pixelBaseNoUnit": 16,
-	"cleanPaths":      []
+	}
 }

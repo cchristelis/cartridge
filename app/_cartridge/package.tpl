@@ -3,10 +3,6 @@
 	"version": "0.0.1",
 	"description": "<%= projectDescription %>",
 	"license": "ISC",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/code-computerlove/cartridge"
-	},
 	"scripts": {
 		"start": "gulp watch && gulp serve"
 	},

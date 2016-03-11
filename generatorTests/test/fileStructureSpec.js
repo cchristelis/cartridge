@@ -15,8 +15,7 @@ describe('As a dev', function() {
             var filePathToTest;
 
             var files = [
-                'project.json',
-                'paths.js'
+                'project.json'
             ];
 
             files.forEach(function(fileName) {

@@ -26,7 +26,7 @@ The following coding standards should be used for this project:
 
 ## Cartridge
 
-This project uses [Cartridge](https://github.com/code-computerlove/cartridge), a set of modules that makes up the Code Computerlove gulp setup.
+This project uses [Cartridge](https://github.com/cartridge/cartridge), a set of modules that makes up the Code Computerlove gulp setup.
 This project was created with Cartridge cli, using version <%= currentVersion %> of cartridge on <%= projectGeneratedDate %>
 
 ### Modules
@@ -37,15 +37,15 @@ The following Cartridge modules are used in this project
 
 ### Adding modules
 
-Additional modules can be added with the [Cartridge command line tool](https://github.com/code-computerlove/cartridge-cli). To use it you must install it globally using npm.
+Additional modules can be added with the [Cartridge command line tool](https://github.com/cartridge/cartridge-cli). To use it you must install it globally using npm.
 
 ```bash
 > npm i -g cartridge-cli
 ```
-Modules can then be added to the project in the following way
+Modules can then be added to the project using npm
 
 ```bash
-> cartridge add
+> npm install <<module_name>> --save-dev
 ```
 
-more details can be found on the [Cartridge cli github page](https://github.com/code-computerlove/cartridge-cli)
+more details can be found on the [Cartridge cli github page](https://github.com/cartridge/cartridge-cli)

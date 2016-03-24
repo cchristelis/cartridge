@@ -8,7 +8,6 @@
 		"type": "git",
 		"url": "git+https://github.com/cartridge/cartridge"
 	},
-	"scripts": {},
 	"dependencies": {
 		"chalk": "^1.1.1",
 		"del": "^2.2.0",
@@ -17,5 +16,8 @@
 		"ncp": "^2.0.0",
 		"path": "^0.12.7"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"chai": "^1.6.1",
+		"chai-fs": "^0.1.0"
+	}
 }

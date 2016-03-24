@@ -1,4 +1,4 @@
-/generatorTests export-ignore
+/test export-ignore
 /docs export-ignore
 .travis.yml export-ignore
 .gitattributes export-ignore

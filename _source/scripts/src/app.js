@@ -1,14 +1,15 @@
-(function(window, undefined){
-	"use strict";
+(function(window, undefined) {
+	/*jshint undef:false*/
+	'use strict';
 
 	var Website = Website || {};
 
-	Website = function(){
+	Website = function() {
 
 		var _self = this;
 
-		function init(){
-			
+		function init() {
+
 		}
 
 		init();

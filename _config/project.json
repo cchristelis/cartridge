@@ -4,5 +4,10 @@
 		"config": "_config",
 		"dest":   "public/_client",
 		"src":    "_source"
+	},
+	"paths": {
+		"src": {
+			"components": "views/_partials/"
+		}
 	}
 }

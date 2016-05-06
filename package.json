@@ -9,12 +9,7 @@
     "url": "git+https://github.com/cartridge/cartridge"
   },
   "dependencies": {
-    "chalk": "^1.1.1",
-    "del": "^2.2.0",
-    "fs-extra": "^0.26.5",
-    "lodash": "^4.6.1",
-    "ncp": "^2.0.0",
-    "path": "^0.12.7"
+    "del": "^2.2.0"
   },
   "devDependencies": {
     "chai": "^1.6.1",
@@ -22,6 +17,9 @@
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "^1.2.1",
     "validate-commit-msg": "^2.6.0"
+  },
+  "scripts": {
+    "test": "mocha"
   },
   "config": {
     "commitizen": {

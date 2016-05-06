@@ -1,8 +1,14 @@
 {
 	"dirs": {
-		"build":  "build/_client",
-		"config": "_config",
-		"dest":   "public/_client",
-		"src":    "_source"
+		"config":    "_config",
+		"src":       "_source",
+		"dest":      "public/_client",
+		"build":     "build/_client",
+		"templates": "views"
+	},
+	"paths": {
+		"src": {
+			"components": "views/_partials"
+		}
 	}
 }

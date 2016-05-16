@@ -26,17 +26,6 @@ describe('As a dev', function() {
             pathToTest = path.join(ROOT_DIR, '_source');
             pathToTest.should.be.a.directory();
         })
-
-        it('then test folder should exist', function() {
-            pathToTest = path.join(ROOT_DIR, 'views');
-            pathToTest.should.be.a.directory();
-        })
-
-        it('then views folder should exist', function() {
-            pathToTest = path.join(ROOT_DIR, 'views');
-            pathToTest.should.be.a.directory();
-        })
-
     });
 
 });

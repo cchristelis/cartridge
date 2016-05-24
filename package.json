@@ -1,6 +1,6 @@
 {
   "name": "cartridge",
-  "version": "0.3.7",
+  "version": "1.0.1",
   "description": "A basic website setup with gulp",
   "license": "ISC",
   "main": "index.js",

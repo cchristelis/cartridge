@@ -52,8 +52,9 @@ gulp.task('clean', function () {
 gulp.task('watch', tasks.watch);
 
 // Task for local dev
-gulp.task('default', tasks.default.concat(['watch']));
-
+if(!config.isProd) {
+	tasks.default.concat(['watch']);
+}
 // Task for team city
 gulp.task('build', function (cb) {
 	return runSeq(['clean'], tasks.default, cb);

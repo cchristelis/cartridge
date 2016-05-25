@@ -1,91 +1,61 @@
 /* ============================================================ *\
-    SETUP
+	SETUP
 \* ============================================================ */
 
 /*jslint node: true */
 'use strict';
 
 // Gulp
-var gulp       = require('gulp');
-var argv       = require('yargs').argv;
-var runSeq     = require('run-sequence');
+var gulp   = require('gulp');
+var argv   = require('yargs').argv;
+var runSeq = require('run-sequence');
+
+// Tasks
+var del = require('del');
+
+// Node
+var path = require('path');
+var fs   = require('fs');
+
+// Tasks
+var tasks         = {};
+
+tasks.default     = [];
+tasks.watch       = [];
 
 // Config
-var config     = require('./_config/project.json');
-var creds      = require('./_config/creds.json');
+var config        = require('./_config/project.json');
+var cartridge     = JSON.parse(fs.readFileSync('./.cartridgerc', 'utf8'));
 
-config.paths   = require('./_config/paths')(config);
+config.cleanPaths = [];
+config.creds      = require('./_config/creds.json');
+
+config.isProd     = argv.prod || false;
+config.isWatched  = argv.watch || false;
 
 /* ============================================================ *\
-    TASK MODULES
+	TASK MODULES
 \* ============================================================ */
 
-require('./gulpTasks/styles.js')(gulp, config, argv);
-require('./gulpTasks/scripts.js')(gulp, config, argv);
-require('./gulpTasks/sprites.js')(gulp, config);
-require('./gulpTasks/image-minify.js')(gulp, config, argv);
-require('./gulpTasks/copy-assets.js')(gulp, config);
-require('./gulpTasks/release.js')(gulp, creds);
-require('./gulpTasks/compile-html.js')(gulp);
-require('./gulpTasks/local-testing.js')(gulp, config);
-require('./gulpTasks/unit-testing.js')(gulp, config, argv);
-require('./gulpTasks/new-component.js')(gulp, argv);
+cartridge.modules.forEach(function(module) {
+	require(path.resolve('node_modules/' + module.task))(gulp, config, tasks);
+});
+
+gulp.task('clean', function () {
+	return del(config.cleanPaths);
+});
 
 /* ============================================================ *\
 	MAIN TASKS
 \* ============================================================ */
 
-gulp.task('watch:sass', function () {
-	if(!argv.prod) {
-		gulp.watch(
-			[config.paths.src.styles + '/**/*.scss', config.paths.src.components + '/**/*.scss'],
-			['sass']
-		);
-	}
-});
+gulp.task('watch', tasks.watch);
 
-gulp.task('watch:js', function () {
-	if(!argv.prod) {
-		gulp.watch(
-			[config.paths.src.scripts + '/**/*.js', config.paths.src.components + '/**/*.js'],
-			['tests', 'scripts']
-		);
-	}
-});
-
-gulp.task('watch:sprites', function () {
-	if(!argv.prod) {
-		gulp.watch(
-			[config.paths.src.images + '/svgs/*.svg'],
-			['sprites']
-		);
-	}
-});
-
-gulp.task('component', function(cb) {
-	runSeq(['new-component'], cb);
-})
-
-gulp.task('watch', function (cb) {
-	runSeq(['watch:sass', 'watch:js', 'watch:sprites'], cb);
-});
-
+// Task for local dev
+if(!config.isProd) {
+	tasks.default.concat(['watch']);
+}
+// Task for team city
 gulp.task('build', function (cb) {
-	runSeq(['default'], ['copy'], ['compile-html'],  cb);
-});
-
-gulp.task('release', function (cb) {
-	runSeq(['build'], ['package-release'],  cb);
-});
-
-gulp.task('serve', function(cb) {
-	runSeq(['localServer'], ['browser-sync'], cb);
-});
-
-gulp.task('dev', function(cb) {
-	runSeq(['default'], ['watch', 'serve'], cb);
-});
-
-gulp.task('default', function (cb) {
-	runSeq(['clean'],['sass-generate-contents'],['sass', 'scripts','scripts:vendor' ,'scripts:ie' ,'copy:fonts', 'imagemin'], ['sass:legacy:ie8'], ['tests'], cb);
+	return runSeq(['clean'], tasks.default, cb);
 });

@@ -1,22 +1,13 @@
 {
-	"dest": "public/_client",
-	"src": "_source",
-    "build": "build/_client",
 	"dirs": {
-        "styles":     	"styles",
-        "scripts":    	"scripts",
-        "images":     	"images",
-        "components": 	"views",
-        "fonts": 	"fonts",
-        "reports": 		"reports"
-    },
-    "tests" : {
-        "configFile" : "karma.conf.js",
-        "reporters" : {
-            "production": ["teamcity"],
-            "dev": ["mocha"]
-        }
-    },
-    "pixelBase": "16px",
-    "pixelBaseNoUnit": 16
+		"build":  "build/_client",
+		"config": "_config",
+		"dest":   "public/_client",
+		"src":    "_source"
+	},
+	"paths": {
+		"src": {
+			"components": "views/_partials/"
+		}
+	}
 }

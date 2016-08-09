@@ -1,5 +1,5 @@
 (function(window, undefined) {
-	/*jshint undef:false*/
+	/*jshint unused:false*/
 	'use strict';
 
 	var Website = Website || {};
